@@ -85,7 +85,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 2.h),
                         child: Text(
                     onboardMap[index]['desc'] ?? 'desc',
-                    style: GoogleFonts.poppins(),
+                    style: textRegularStyle ,
+                    textAlign: TextAlign.center,
                   ),
                       ))
                 ],
@@ -97,46 +98,57 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (ctx, orient, type) {
       return Scaffold(
-        body: Column(
-          children: [
-            Expanded(
-                child: IntroSlider(
-              listCustomTabs: generateCustomTabs(),
-              isShowSkipBtn: false,
-              isShowNextBtn: false,
-              isShowPrevBtn: false,
-              isShowDoneBtn: false,
-            )),
-            Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: defMargin, vertical: 4.h),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RoundedButton(
-                      width: double.infinity,
-                      title: 'Mulai hidup sehat',
-                      style: GoogleFonts.poppins(color: Colors.black),
-                      background: primaryColor,
-                      onClick: () {
-                        Navigator.pushNamed(context, '/register');
-                      }),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  RoundedOutlineButton(
-                      color: Colors.grey,
-                      width: double.infinity,
-                      title: 'Saya telah mempunyai akun',
-                      style: GoogleFonts.poppins(color: Colors.black),
-                      onClick: () {
-                        Navigator.pushNamed(context, '/login');
-                      }),
-                ],
-              ),
-            )
-          ],
+        
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: defMargin, vertical: 2.h),
+          child: Column(
+            children: [
+              Expanded(
+                  child: IntroSlider(
+                listCustomTabs: generateCustomTabs(),
+                isShowSkipBtn: false,
+                isShowNextBtn: false,
+                isShowPrevBtn: false,
+                isShowDoneBtn: false,
+              )),
+
+
+             RoundedButton(
+                  width: double.infinity,
+                  title: 'Terobos',
+                  style: GoogleFonts.poppins(color: Colors.black),
+                  background: Colors.red,
+                  onClick: () {
+                    Navigator.pushNamed(context, '/water-record');
+                  }),
+               Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RoundedButton(
+                        width: double.infinity,
+                        title: 'Mulai hidup sehat',
+                        style: GoogleFonts.poppins(color: Colors.black),
+                        background: primaryColor,
+                        onClick: () {
+                          Navigator.pushNamed(context, '/register');
+                        }),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    RoundedOutlineButton(
+                        color: Colors.grey,
+                        width: double.infinity,
+                        title: 'Saya telah mempunyai akun',
+                        style: GoogleFonts.poppins(color: Colors.black),
+                        onClick: () {
+                          Navigator.pushNamed(context, '/login');
+                        }),
+                  ],
+                ),
+            
+            ],
+          ),
         ),
       );
     });

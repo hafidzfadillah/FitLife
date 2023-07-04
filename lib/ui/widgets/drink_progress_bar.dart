@@ -6,12 +6,14 @@ class DrinkProgressBar extends StatefulWidget {
   final int currentDrink;
   final int goalDrink;
   final double width;
+  final Color color;
 
   const DrinkProgressBar({
     Key? key,
     required this.currentDrink,
     required this.goalDrink,
     required this.width,
+    this.color = primaryColor,
   }) : super(key: key);
 
   @override
@@ -69,14 +71,21 @@ class _DrinkProgressBarState extends State<DrinkProgressBar>
                   value: percentage,
                   strokeWidth: 10,
                   backgroundColor: Colors.grey[300],
-                  valueColor: const AlwaysStoppedAnimation<Color>(primaryColor),
+                  valueColor:  AlwaysStoppedAnimation<Color>(widget.color   ),
                 ),
               ),
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Image.asset(
+                      "assets/images/drink-water.png",
+                      width: 35,
+                      height: 35,
+                    ),
+                    const SizedBox(height: 5),
                     Text(
+                      
                       "${_animation.value.toInt()} / ${widget.goalDrink} ",
                       style: const TextStyle(
                         fontSize: 35,

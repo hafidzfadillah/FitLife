@@ -1,3 +1,6 @@
+import 'package:fitlife/ui/pages/shop_screen.dart';
+import 'package:fitlife/ui/pages/topup_bamboo_screen.dart';
+import 'package:fitlife/ui/pages/topup_bamboo_succes_screen.dart';
 import 'package:flutter/material.dart';
 import '../core/models/survey/survey_model.dart';
 import '../ui/pages/FoodDetailScreen.dart';
@@ -101,7 +104,13 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const RecordRunScreen());
       case '/record-add-step':
         return MaterialPageRoute(builder: (_) => const StepAddScren());
+      case '/shop' : 
+        return MaterialPageRoute(builder: (_) => const ShopScreen()); 
 
+      case '/topup-bamboo':
+        return MaterialPageRoute(builder: (_) => TopUpBambooScreen());
+      case '/topup-bamboo-success':
+        return MaterialPageRoute(builder: (_) => TopUpBambooSuccessScreen());
       // case '/product-detail':
       //   return MaterialPageRoute(builder: (_) => ProductDetailScreen());
       // case '/cart':

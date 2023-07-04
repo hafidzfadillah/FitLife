@@ -19,6 +19,7 @@ const Color alertColorSurface = Color(0xffFFEEEE);
 const Color blackColor = Color(0xff333333);
 
 const Color headerColor = Color(0xff1B1C1E);
+const Color textRegularColor = Color(0xff484848);
 
 const double headerSize = 20;
 const double subheaderSize = 16;
@@ -37,11 +38,12 @@ TextStyle whiteTextStyle = GoogleFonts.inter(color: neutral20);
 TextStyle subtitleTextStyle2 = GoogleFonts.poppins(color: neutral70);
 
 TextStyle normalText = GoogleFonts.poppins(color: blackColor, fontSize: 14);
+TextStyle textRegularStyle = GoogleFonts.poppins(color: textRegularColor, fontSize: 14);
 
 TextStyle typeHeading = GoogleFonts.dmSans(color: primaryColor);
 TextStyle typetitle = GoogleFonts.dmSans(color: neutral70);
 
 TextStyle surveyHeading = GoogleFonts.poppins(
     fontSize: 24, fontWeight: FontWeight.w600, color: blackColor);
-TextStyle surveyOptionText =
-    GoogleFonts.poppins(fontSize: headerSize, fontWeight: FontWeight.w500 , color: blackColor);
+TextStyle surveyOptionText = GoogleFonts.poppins(
+    fontSize: headerSize, fontWeight: FontWeight.w500, color: blackColor);

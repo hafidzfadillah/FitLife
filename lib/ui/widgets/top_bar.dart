@@ -10,8 +10,10 @@ import 'package:fitlife/ui/home/theme.dart';
 class MainTopBar extends StatefulWidget {
   const MainTopBar({
     Key? key,
+    this.title = '',
   }) : super(key: key);
 
+  final String title;
   @override
   State<MainTopBar> createState() => _MainTopBarState();
 }
@@ -20,11 +22,11 @@ class _MainTopBarState extends State<MainTopBar> {
   // void initState
   @override
   void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final userProvider = Provider.of<UserProvider>(context, listen: false);
-      userProvider.getUserData();
-    });
+    // super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+    //   userProvider.getUserData();
+    // });
   }
 
   @override
@@ -33,57 +35,71 @@ class _MainTopBarState extends State<MainTopBar> {
     final userData = userProvider.user;
 
     return Container(
-      color: Colors.white,
-      padding: EdgeInsets.all(defMargin),
+      decoration:  BoxDecoration(
+        border:  Border(
+          bottom: BorderSide(
+            color: Color(0xFFE2E2E0),
+            width: 1,
+          ),
+        ),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: defMargin , vertical:  7  ),
       child: Row(
         children: [
-          InkWell(
-            onTap: () {},
-            child: Container(
-              padding:
-                  EdgeInsets.symmetric(horizontal: defMargin, vertical: 0.5.h),
-              decoration: BoxDecoration(
-                  border: Border.all(color: neutral30),
-                  borderRadius: BorderRadius.circular(defMargin)),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.star,
-                    color: Colors.yellow[700],
+          Text(widget.title,
+              style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xff333333)), 
                   ),
-                  SizedBox(
-                    width: 1.h,
-                  ),
-                  Text(
-                    '${userData?.point.toString() ?? '0'} poin • Level  1',
-                    style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
-                  )
-                ],
-              ),
-            ),
-          ),
           Spacer(),
-          IconButton(
+
+          Row(children: [
+IconButton(
             icon: Image.asset(
-              'assets/images/gg_bot.png',
+              'assets/images/coin.png',
               width: 24,
               height: 24,
             ),
             onPressed: () {
-              Navigator.of(context, rootNavigator: true).pushNamed('/chatbot');
+            
             },
             color: Color(0xff333333),
           ),
+          
+          Text(
+           110.toString(),
+            style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Color(0xffFFCD00)), 
+          )
+          
+          ],),
+          
           SizedBox(
             width: 2.h,
           ),
-          InkWell(
-              onTap: () {
-                Navigator.of(context, rootNavigator: true)
-                    .pushNamed('/profile');
-              },
-              child: Icon(Icons.menu, color: Color(0xff333333))),
+           Row(
+            children: [
+              IconButton(
+                icon: Image.asset(
+                  'assets/images/bamboo.png',
+                  width: 24,
+                  height: 24,
+                ),
+                onPressed: () {},
+                color: Color(0xff333333),
+              ),
+              Text(
+                50.toString(),
+                style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff00C680)),
+              )
+            ],
+          ),
         ],
       ),
     );
