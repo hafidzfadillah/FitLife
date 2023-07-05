@@ -1,3 +1,4 @@
+import 'package:fitlife/ui/pages/leaderboard_screen.dart';
 import 'package:fitlife/ui/pages/shop_screen.dart';
 import 'package:fitlife/ui/pages/topup_bamboo_screen.dart';
 import 'package:fitlife/ui/pages/topup_bamboo_succes_screen.dart';
@@ -111,6 +112,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => TopUpBambooScreen());
       case '/topup-bamboo-success':
         return MaterialPageRoute(builder: (_) => TopUpBambooSuccessScreen());
+      case '/leadeboard':
+        return MaterialPageRoute(builder: (_) => LeaderboardScreen()); 
       // case '/product-detail':
       //   return MaterialPageRoute(builder: (_) => ProductDetailScreen());
       // case '/cart':

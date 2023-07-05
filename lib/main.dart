@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:fitlife/GlobalProviders.dart';
 import 'package:fitlife/core/viewmodels/categories/categories_provider.dart';
@@ -22,6 +23,11 @@ import 'package:camera/camera.dart';
 List<CameraDescription>? cameras;
 
 void main() async {
+  // Atur status bar menjadi transparan
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.bottom]);
+
+
   WidgetsFlutterBinding.ensureInitialized();
   Intl.defaultLocale = 'id'; // or any other locale you want to use
   var providers = await GlobalProviders.register();

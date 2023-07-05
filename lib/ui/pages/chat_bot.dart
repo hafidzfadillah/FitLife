@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:chat_bubbles/bubbles/bubble_special_one.dart';
 import 'package:chat_bubbles/message_bars/message_bar.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +32,34 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     return Scaffold(
         backgroundColor: neutral20,
         appBar: CustomAppBar(
-          title: 'Coach Ai',
+          title: 'Pandan AI',
           backgroundColor: lightModeBgColor,
           elevation: 0,
+          actions: [ 
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Image.asset(
+                      'assets/images/bamboo.png',
+                      width: 24,
+                      height: 24,
+                    ),
+                    onPressed: () {},
+                    color: Color(0xff333333),
+                  ),
+                  Text(
+                    50.toString(),
+                    style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xff00C680)),
+                  )
+                ],
+              ),
+            ),
+          ],
           leading: CustomBackButton(onClick: () {
             Navigator.pop(context);
           }),
@@ -99,17 +125,69 @@ class _ChatBotBodyState extends State<ChatBotBody> {
                       color: Color(0xFFF9F9F9),
                       child: ListView(
                         children: [
-                          CustomChatBubble(
-                              text:
-                                  "Halo saya adalah Vita Bot, apa yang bisa saya bantu?",
-                              date: '',
-                              background: neutral30,
-                              isSender: false),
-                          CustomChatBubble(
-                              text: "Yuk coba dengan pertanyaan contoh berikut",
-                              date: '',
-                              background: neutral30,
-                              isSender: false),
+                       
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal:  40, vertical: 24 ),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 16),                              decoration: BoxDecoration(
+                                  border: Border.all(color: neutral60),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: AnimatedTextKit(
+                                  isRepeatingAnimation: false,
+                                  pause: Duration(seconds: 2000),
+                                  animatedTexts: [
+                                    TypewriterAnimatedText(
+                                        "Halo , kamu bisa tanya apapu kepada aku seputar kesehatan tubuh",
+                                        textStyle: GoogleFonts.poppins())
+                                  ]),
+                            ),
+                          ),
+                          Center(
+                            child:  Image.asset('assets/images/pandai4x.png', width: 200, height: 200,  ),
+                          ) ,
+
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text("Contoh Pertanyaan", style: GoogleFonts.poppins(
+                                      fontSize: 16,
+                                      color: const Color(0xff333333),
+                                      fontWeight: FontWeight.w600
+                                  )),
+                          ), 
+
+                              
+                          Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      chatProv.sendMessage(
+                                          "Bagaimana gerakan push up yang benar ?");
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(bottom: 12),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 16),
+                                      decoration: BoxDecoration(
+                                        color:  Color(0xffF5F5F5),
+                                        
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      child: Text(
+                                        "Bagaimana gerakan push up yang benar ",
+                                        style: normalText.copyWith(
+                                            fontSize: 14, color: blackColor , fontWeight: FontWeight.w500), 
+                                      ),
+                                    ),
+                                  ),
+                                 
+                                ],
+                              )),
                           Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 16, vertical: 8),
@@ -126,40 +204,20 @@ class _ChatBotBodyState extends State<ChatBotBody> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 16, vertical: 8),
                                       decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: primaryColor, width: 1),
+                                        color:  Color(0xffF5F5F5),
+                                        
                                           borderRadius:
                                               BorderRadius.circular(8)),
                                       child: Text(
-                                        "Bagaimana gerakan push up yang benar ?",
+                                        "Berikan saya jadwal makan untuk bulking ?",
                                         style: normalText.copyWith(
-                                            fontSize: 16, color: primaryColor),
+                                            fontSize: 14, color: blackColor , fontWeight: FontWeight.w500), 
                                       ),
                                     ),
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      chatProv.sendMessage(
-                                          "makanan yang bagus saat diet ?");
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(bottom: 12),
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 16, vertical: 8),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: primaryColor, width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(8)),
-                                      child: Text(
-                                        "Makanan yang bagus saat diet",
-                                        style: normalText.copyWith(
-                                            fontSize: 16, color: primaryColor),
-                                      ),
-                                    ),
-                                  ),
+                                 
                                 ],
-                              ))
+                              )),
                         ],
                       ))),
               MessageBar(

@@ -1,5 +1,7 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:fitlife/core/models/bpm/bpm_model.dart';
 import 'package:fitlife/core/utils/navigation/navigation_utils.dart';
@@ -131,6 +133,7 @@ class VitaPulseScreenBody extends StatelessWidget {
 
         return SafeArea(
             child: ListView(
+              
           children: [
             Container(
                 width: double.infinity,
@@ -144,7 +147,54 @@ class VitaPulseScreenBody extends StatelessWidget {
                   child: _UserHealthSummary(),
                 )),
             const SizedBox(height: 24),
-            _UserHistoryHealth(),
+             Padding(
+               padding: const EdgeInsets.symmetric(horizontal: 16.0 ),
+               child: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/pandai_head.png',
+                    width: 30,
+                    height: 30,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  AnimatedTextKit(
+                      isRepeatingAnimation: false,
+                      pause: Duration(seconds: 2000),
+                      animatedTexts: [
+                        TypewriterAnimatedText('Tahukah kamu  ? ',
+                            textAlign: TextAlign.center,
+                            textStyle: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: const Color(0xff333333),
+                                fontWeight: FontWeight.w600))
+                      ]),
+                ],
+                         ),
+             ),
+            
+            Padding(
+
+              padding: const EdgeInsets.all(16.0),
+              child: AnimatedTextKit(
+                isRepeatingAnimation: false,
+                pause: Duration(seconds: 2000),
+                animatedTexts: [
+                  TypewriterAnimatedText(
+                      "Detak Jantung Normal: Detak jantung normal pada orang dewasa yang sehat berada dalam rentang 60-100 bpm saat beristirahat. Namun, rentang ini dapat bervariasi tergantung pada faktor individu seperti usia, tingkat kebugaran, dan kondisi kesehatan.",
+                      textStyle: normalText.copyWith(
+                          fontSize: 14,
+                          color: const Color(0xff484848),
+                          fontWeight: FontWeight.w400)),
+                ],
+              ),
+            ),
+                 
+
+      
+                  
+            const _UserHistoryHealth(),
           ],
         ));
       },
@@ -160,48 +210,49 @@ class _UserHealthSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
-      if (userProvider.userBpm == null && !userProvider.onSearch) {
-        userProvider.getUserHistoryHealth();
-        return const Center(child: CircularProgressIndicator());
-      }
+//       if (userProvider.userBpm == null && !userProvider.onSearch) {
+//         userProvider.getUserHistoryHealth();
+//         return const Center(child: CircularProgressIndicator());
+//       }
 
-      if (userProvider.userBpm == null && userProvider.onSearch) {
-        return const Center(child: CircularProgressIndicator());
-      }
+//       if (userProvider.userBpm == null && userProvider.onSearch) {
+//         return const Center(child: CircularProgressIndicator());
+//       }
 
-      final List<int> bpmValues =
-          userProvider.userBpm?.map((e) => e.value)?.toList() ?? [];
+//       final List<int> bpmValues =
+//           userProvider.userBpm?.map((e) => e.value)?.toList() ?? [];
 
-      if (bpmValues.isNotEmpty) {
-        final int averageBpm =
-            (bpmValues.reduce((a, b) => a + b) / bpmValues.length).round();
-// Get heart rate data points for chart
-        final List<FlSpot> heartRatePoints = [];
-        for (final bpm in userProvider.userBpm ?? []) {
-          final DateTime date = bpm.createdAt;
-          final double x = date.millisecondsSinceEpoch.toDouble();
-          final double y = bpm.value.toDouble();
-          final FlSpot spot = FlSpot(x, y);
-          heartRatePoints.add(spot);
-        }
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Text(
-                '$averageBpm bpm',
-                style: normalText.copyWith(
-                    fontSize: 18,
-                    color: const Color(0xff333333),
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            const SizedBox(height: 80),
-            Container(child: LineChartHeartRate(heartRatePoints)),
-          ],
-        );
-      } else {
+//       if (bpmValues.isNotEmpty) {
+//         final int averageBpm =
+//             (bpmValues.reduce((a, b) => a + b) / bpmValues.length).round();
+// // Get heart rate data points for chart
+//         final List<FlSpot> heartRatePoints = [];
+//         for (final bpm in userProvider.userBpm ?? []) {
+//           final DateTime date = bpm.createdAt;
+//           final double x = date.millisecondsSinceEpoch.toDouble();
+//           final double y = bpm.value.toDouble();
+//           final FlSpot spot = FlSpot(x, y);
+//           heartRatePoints.add(spot);
+//         }
+    
+      //   return Column(
+      //     crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: [
+      //       Center(
+      //         child: Text(
+      //           '1 bpm',
+      //           style: normalText.copyWith(
+      //               fontSize: 18,
+      //               color: const Color(0xff333333),
+      //               fontWeight: FontWeight.w600),
+      //         ),
+      //       ),
+      //       const SizedBox(height: 80),
+      //       // Container(child: LineChartHeartRate(heartRatePoints)),
+      //     ],
+      //   );
+    
+      // } else {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -225,7 +276,7 @@ class _UserHealthSummary extends StatelessWidget {
           ],
         );
       }
-    });
+    );
   }
 }
 
@@ -237,14 +288,14 @@ class _UserHistoryHealth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
-      if (userProvider.userBpm == null && !userProvider.onSearch) {
-        userProvider.getUserHistoryHealth();
-        return const Center(child: CircularProgressIndicator());
-      }
+      // if (userProvider.userBpm == null && !userProvider.onSearch) {
+      //   userProvider.getUserHistoryHealth();
+      //   return const Center(child: CircularProgressIndicator());
+      // }
 
-      if (userProvider.userBpm == null && userProvider.onSearch) {
-        return const Center(child: CircularProgressIndicator());
-      }
+      // if (userProvider.userBpm == null && userProvider.onSearch) {
+      //   return const Center(child: CircularProgressIndicator());
+      // }
 
       return SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -263,20 +314,29 @@ class _UserHistoryHealth extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: userProvider.userBpm!.length,
-              itemBuilder: (context, index) {
-                return HistoryCard(
+            HistoryCard(
                   unit: "bpm",
                   withTarget: false,
                   title: "Catatan detak jantung",
-                  value: userProvider.userBpm?[index].value ?? 0,
-                  date: userProvider.userBpm?[index].createdAt.toString() ?? "",
-                );
-              },
-            )
+                  value:  0,
+                  backgroundColor:  Color(0xffFFF7F7),
+                  date: DateTime.now().toString(),
+                  urlIcon: "assets/images/heart_icon.png",
+                )
+            // ListView.builder(
+            //   shrinkWrap: true,
+            //   physics: const NeverScrollableScrollPhysics(),
+            //   itemCount: userProvider.userBpm!.length,
+            //   itemBuilder: (context, index) {
+            //     return HistoryCard(
+            //       unit: "bpm",
+            //       withTarget: false,
+            //       title: "Catatan detak jantung",
+            //       value: userProvider.userBpm?[index].value ?? 0,
+            //       date: userProvider.userBpm?[index].createdAt.toString() ?? "",
+            //     );
+            //   },
+            // )
           ],
         ),
       );

@@ -119,7 +119,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   style: GoogleFonts.poppins(color: Colors.black),
                   background: Colors.red,
                   onClick: () {
-                    Navigator.pushNamed(context, '/water-record');
+                    Navigator.pushNamed(context, '/leadeboard');
                   }),
                Column(
                   mainAxisSize: MainAxisSize.min,
