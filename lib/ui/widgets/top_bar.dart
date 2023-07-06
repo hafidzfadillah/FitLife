@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -84,6 +85,75 @@ class _MainTopBarState extends State<MainTopBar> {
                     .pushNamed('/profile');
               },
               child: Icon(Icons.menu, color: Color(0xff333333))),
+        ],
+      ),
+    );
+  }
+}
+
+class MainTopBar2 extends StatefulWidget {
+  const MainTopBar2({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State<MainTopBar2> createState() => _MainTopBar2State();
+}
+
+class _MainTopBar2State extends State<MainTopBar2> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.all(defMargin),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              widget.title,
+              style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600, fontSize: 16),
+            ),
+          ),
+          SizedBox(width: 2.h,),
+          InkWell(
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  'assets/images/coin.svg',
+                  width: 3.h,
+                  height: 3.h,
+                ),
+                SizedBox(
+                  width: 1.h,
+                ),
+                Text(
+                  '100',
+                  style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.amber,
+                      fontSize: 16),
+                ),
+                SizedBox(
+                  width: 3.h,
+                ),
+                SvgPicture.asset(
+                  'assets/images/bamboo.svg',
+                  width: 3.h,
+                  height: 3.h,
+                ),
+                SizedBox(
+                  width: 1.h,
+                ),
+                Text(
+                  '100',
+                  style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.green,
+                      fontSize: 16),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

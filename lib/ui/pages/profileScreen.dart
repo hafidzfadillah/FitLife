@@ -32,13 +32,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         backgroundColor: lightModeBgColor,
         elevation: 0,
-        leading: IconButton(
-          color: Color(0xff33333),
-          icon: Icon(Icons.close, color: Colors.black, size: 30),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        // leading: IconButton(
+        //   color: Color(0xff33333),
+        //   icon: Icon(Icons.close, color: Colors.black, size: 30),
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        // ),
       ),
       body: ChangeNotifierProvider(
           create: (context) => UserProvider(), child: ProfileBody()),

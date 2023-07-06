@@ -1,4 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -22,15 +24,34 @@ class _Survey6State extends State<Survey6> {
     final survey = Provider.of<SurveyProvider>(context);
 
     return Column(children: [
-      Text(
-        'Pertanyaan 6',
-        style: GoogleFonts.poppins(fontSize: 14),
+      Row(
+        children: [
+          SvgPicture.asset(
+            'assets/images/p_face.svg',
+            width: 8.h,
+            height: 8.h,
+          ),
+          SizedBox(
+            width: 2.h,
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(2.h),
+              decoration: BoxDecoration(
+                  border: Border.all(color: neutral60),
+                  borderRadius: BorderRadius.circular(1.h)),
+              child: AnimatedTextKit(
+                  isRepeatingAnimation: false,
+                  pause: Duration(milliseconds: 3000),
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                       getGreeting(survey.tujuan, survey.berat.toString()),
+                        textStyle: GoogleFonts.poppins())
+                  ]),
+            ),
+          ),
+        ],
       ),
-      SizedBox(
-        height: 1.h,
-      ),
-      Text('Berat badan yang ingin dicapai?',
-          textAlign: TextAlign.center, style: surveyHeading),
       SizedBox(
         height: 4.h,
       ),
@@ -70,7 +91,7 @@ class _Survey6State extends State<Survey6> {
           Container(
             width: 20.h,
             child: TextFormField(
-              initialValue: survey.targetBB.toString(),
+              initialValue: survey.tujuan.toLowerCase().contains('tahan') ? survey.berat.toString() : survey.targetBB.toString(),
               maxLength: 3,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
@@ -93,5 +114,15 @@ class _Survey6State extends State<Survey6> {
         ],
       )
     ]);
+  }
+
+  String getGreeting(String goal, String bb) {
+    if(goal.toLowerCase().contains('naik')) {
+      return 'Dari $bb kg, kamu mau naik jadi berapa kg?';
+    } else if(goal.toLowerCase().contains('urun')) {
+      return 'Dari $bb kg, kamu mau turun jadi berapa kg?';
+    }
+
+    return 'Targetnya tetap $bb ya? Atau mungkin sedikit naik/turun ga masalah?';
   }
 }

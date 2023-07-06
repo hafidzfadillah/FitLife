@@ -1,4 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -21,15 +23,34 @@ class _Survey5State extends State<Survey5> {
   Widget build(BuildContext context) {
     final survey = Provider.of<SurveyProvider>(context);
     return Column(children: [
-      Text(
-        'Pertanyaan 5',
-        style: GoogleFonts.poppins(fontSize: 14),
+      Row(
+        children: [
+          SvgPicture.asset(
+            'assets/images/p_face.svg',
+            width: 8.h,
+            height: 8.h,
+          ),
+          SizedBox(
+            width: 2.h,
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(2.h),
+              decoration: BoxDecoration(
+                  border: Border.all(color: neutral60),
+                  borderRadius: BorderRadius.circular(1.h)),
+              child: AnimatedTextKit(
+                  isRepeatingAnimation: false,
+                  pause: Duration(milliseconds: 3000),
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                        'Aku yang buncit ini beratnya bisa sampai 135 kg loh. Kalau kamu berapa?',
+                        textStyle: GoogleFonts.poppins())
+                  ]),
+            ),
+          ),
+        ],
       ),
-      SizedBox(
-        height: 1.h,
-      ),
-      Text('Berapa berat badan Anda sekarang?',
-          textAlign: TextAlign.center, style: surveyHeading),
       SizedBox(
         height: 4.h,
       ),

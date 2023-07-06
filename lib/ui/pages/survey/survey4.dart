@@ -1,4 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -21,17 +23,33 @@ class _Survey4State extends State<Survey4> {
     final survey = Provider.of<SurveyProvider>(context);
 
     return Column(children: [
-      Text(
-        'Pertanyaan 4',
-        style: GoogleFonts.poppins(fontSize: 14),
-      ),
-      SizedBox(
-        height: 1.h,
-      ),
-      Text(
-        'Berapa tinggi Anda sekarang?',
-        textAlign: TextAlign.center,
-        style: surveyHeading,
+      Row(
+        children: [
+          SvgPicture.asset(
+            'assets/images/p_face.svg',
+            width: 8.h,
+            height: 8.h,
+          ),
+          SizedBox(
+            width: 2.h,
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(2.h),
+              decoration: BoxDecoration(
+                  border: Border.all(color: neutral60),
+                  borderRadius: BorderRadius.circular(1.h)),
+              child: AnimatedTextKit(
+                  isRepeatingAnimation: false,
+                  pause: Duration(milliseconds: 3000),
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                        'Tinggi aku bisa sampai 150 cm loh. Kalau kamu?',
+                        textStyle: GoogleFonts.poppins())
+                  ]),
+            ),
+          ),
+        ],
       ),
       SizedBox(
         height: 4.h,

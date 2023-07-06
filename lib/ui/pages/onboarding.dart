@@ -61,13 +61,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         border: Border.all(color: neutral60),
                         borderRadius: BorderRadius.circular(1.h)),
                     child: AnimatedTextKit(
-                      isRepeatingAnimation: false,
-                      pause: Duration(seconds: 2000),
-                      animatedTexts: [
-                      TypewriterAnimatedText(
-                          onboardMap[index]['title'] ?? 'title',
-                          textStyle: GoogleFonts.poppins())
-                    ]),
+                        isRepeatingAnimation: false,
+                        pause: Duration(seconds: 2000),
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                              onboardMap[index]['title'] ?? 'title',
+                              textStyle: GoogleFonts.poppins())
+                        ]),
                   ),
                   SizedBox(
                     height: 5.h,
@@ -82,12 +82,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                   Center(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 2.h),
-                        child: Text(
-                    onboardMap[index]['desc'] ?? 'desc',
-                    style: GoogleFonts.poppins(),
-                  ),
-                      ))
+                    padding: EdgeInsets.symmetric(horizontal: 2.h),
+                    child: Text(
+                      onboardMap[index]['desc'] ?? 'desc',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(),
+                    ),
+                  ))
                 ],
               ),
             ));
@@ -120,7 +121,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       style: GoogleFonts.poppins(color: Colors.black),
                       background: primaryColor,
                       onClick: () {
-                        Navigator.pushNamed(context, '/register');
+                        Navigator.pushNamed(context, '/survey');
                       }),
                   SizedBox(
                     height: 2.h,
@@ -129,7 +130,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       color: Colors.grey,
                       width: double.infinity,
                       title: 'Saya telah mempunyai akun',
-                      style: GoogleFonts.poppins(color: Colors.black),
+                      style: GoogleFonts.poppins(color: blackColor),
                       onClick: () {
                         Navigator.pushNamed(context, '/login');
                       }),

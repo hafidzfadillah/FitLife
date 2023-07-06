@@ -5,7 +5,7 @@ double defMargin = 16.0;
 double defRadius = 12.0;
 
 const Color primaryColor = Color(0xff9EF07B);
-const Color primaryDarkColor = Color(0xFF43A31F);
+const Color primaryDarkColor = Color(0xFF7FB06B);
 const Color primaryLightColor = Color(0xffD9FDD3);
 const Color lightModeBgColor = Color(0xffFFFFFF);
 const Color neutral100 = Color(0xff0A0A0A);
@@ -43,5 +43,5 @@ TextStyle typetitle = GoogleFonts.dmSans(color: neutral70);
 
 TextStyle surveyHeading = GoogleFonts.poppins(
     fontSize: 24, fontWeight: FontWeight.w600, color: blackColor);
-TextStyle surveyOptionText =
-    GoogleFonts.poppins(fontSize: headerSize, fontWeight: FontWeight.w500 , color: blackColor);
+TextStyle surveyOptionText = GoogleFonts.poppins(
+    fontSize: headerSize, fontWeight: FontWeight.w500, color: blackColor);

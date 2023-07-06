@@ -1,4 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -46,15 +48,31 @@ class SurveyResultScreen extends StatelessWidget {
                   SizedBox(
                     height: 2.h,
                   ),
-                  Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(defRadius),
-                          border: Border.all(color: neutral60)),
-                      padding: EdgeInsets.all(defMargin),
-                      child: Text(
-                        result!.warning,
-                        style: GoogleFonts.poppins(color: neutral70),
-                      )),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/p_face.svg',
+                        width: 8.h,
+                        height: 8.h,
+                      ),
+                      SizedBox(
+                        width: defMargin,
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(2.h),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: neutral60),
+                            borderRadius: BorderRadius.circular(1.h)),
+                        child: AnimatedTextKit(
+                            isRepeatingAnimation: false,
+                            pause: Duration(milliseconds: 3000),
+                            animatedTexts: [
+                              TypewriterAnimatedText('${result!.warning}',
+                                  textStyle: GoogleFonts.poppins())
+                            ]),
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     height: 4.h,
                   ),

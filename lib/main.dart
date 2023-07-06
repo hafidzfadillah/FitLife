@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:fitlife/GlobalProviders.dart';
 import 'package:fitlife/core/viewmodels/categories/categories_provider.dart';
@@ -73,6 +74,7 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.green,
         ),
         onGenerateRoute: RouteGenerator.generateRoute,
+        builder: EasyLoading.init(),
       ),
     );
   }

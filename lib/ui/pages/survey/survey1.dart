@@ -1,4 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -21,15 +23,33 @@ class _Survey1State extends State<Survey1> {
 
     return Column(
       children: [
-        Text(
-          'Pertanyaan 1',
-          style: GoogleFonts.poppins(fontSize: 14),
+        Row(
+          children: [
+            SvgPicture.asset(
+              'assets/images/p_face.svg',
+              width: 8.h,
+              height: 8.h,
+            ),
+            SizedBox(
+              width: 2.h,
+            ),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(2.h),
+                decoration: BoxDecoration(
+                    border: Border.all(color: neutral60),
+                    borderRadius: BorderRadius.circular(1.h)),
+                child: AnimatedTextKit(
+                    isRepeatingAnimation: false,
+                    pause: Duration(milliseconds: 3000),
+                    animatedTexts: [
+                      TypewriterAnimatedText('Apa jenis kelamin kamu?',
+                          textStyle: GoogleFonts.poppins())
+                    ]),
+              ),
+            ),
+          ],
         ),
-        SizedBox(
-          height: 1.h,
-        ),
-        Text('Jenis Kelamin Anda?',
-            textAlign: TextAlign.center, style: surveyHeading),
         SizedBox(
           height: 4.h,
         ),
@@ -46,23 +66,31 @@ class _Survey1State extends State<Survey1> {
                 color: neutral30,
                 borderRadius: BorderRadius.circular(defMargin),
                 border: survey.gender == Gender.Pria
-                    ? Border.all(color: primaryColor)
+                    ? Border.all(color: primaryDarkColor)
                     : null),
             child: Row(
               children: [
+                SvgPicture.asset(
+                  'assets/images/boy.svg',
+                  width: 3.h,
+                  height: 3.h,
+                ),
+                SizedBox(
+                  width: 2.h,
+                ),
                 Expanded(
                   child: Text(
                     'Laki-laki',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: headerSize,
+                        fontSize: 16,
                         color: blackColor),
                   ),
                 ),
                 Radio(
                     value: Gender.Pria,
                     groupValue: survey.gender,
-                    activeColor: primaryColor,
+                    activeColor: primaryDarkColor,
                     onChanged: ((value) {
                       // setState(() {
                       survey.gender = Gender.Pria;
@@ -88,23 +116,31 @@ class _Survey1State extends State<Survey1> {
                 color: neutral30,
                 borderRadius: BorderRadius.circular(defMargin),
                 border: survey.gender == Gender.Wanita
-                    ? Border.all(color: primaryColor)
+                    ? Border.all(color: primaryDarkColor)
                     : null),
             child: Row(
               children: [
+                SvgPicture.asset(
+                  'assets/images/girl.svg',
+                  width: 3.h,
+                  height: 3.h,
+                ),
+                SizedBox(
+                  width: 2.h,
+                ),
                 Expanded(
                   child: Text(
                     'Perempuan',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: headerSize,
+                        fontSize: 16,
                         color: blackColor),
                   ),
                 ),
                 Radio(
                     value: Gender.Wanita,
                     groupValue: survey.gender,
-                    activeColor: primaryColor,
+                    activeColor: primaryDarkColor,
                     onChanged: ((value) {
                       // setState(() {
                       survey.gender = Gender.Wanita;
@@ -118,17 +154,20 @@ class _Survey1State extends State<Survey1> {
         Container(
           padding: EdgeInsets.symmetric(vertical: 2.h),
           child: Row(children: [
-            // Icon(Icons.info_outline),
-            // SizedBox(
-            //   width: 2.h,
-            // ),
+            Icon(
+              Icons.info_outline,
+              color: primaryDarkColor,
+            ),
+            SizedBox(
+              width: 2.h,
+            ),
             Expanded(
               child: Text(
-                'Mengetahui gender penting untuk menghitung metabolisme tubuh agar program yang diberikan sesuai dengan kebutuhan Anda.',
+                'Dengan tahu jenis kelaminmu, Pandan bisa menghitung seberapa cepat tubuhmu membakar energi. Jadi nanti program yang aku kasih bisa sesuai banget dengan kebutuhanmu!',
                 softWrap: true,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
                 style: normalText.copyWith(
-                  fontSize: 14,
+                  fontSize: 12,
                   color: Color(0xff707070),
                 ),
               ),

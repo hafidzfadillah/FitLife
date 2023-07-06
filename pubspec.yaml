@@ -70,6 +70,9 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   intro_slider: ^4.2.0
   animated_text_kit: ^4.2.2
+  flutter_easyloading: ^3.0.5
+  expandable_text: ^2.3.0
+  flutter_swiper_view: ^1.1.8
 
 dev_dependencies:
   flutter_test:
@@ -97,6 +100,7 @@ flutter:
   assets:
     - assets/images/
     - assets/models/
+    - assets/video/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

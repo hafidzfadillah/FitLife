@@ -31,48 +31,48 @@ class _DaftarScreenState extends State<DaftarScreen> {
   final nameValidator = RequiredValidator(errorText: 'Nama wajib diisi');
 
   final emailValidator = MultiValidator([
-    RequiredValidator(errorText: 'Email wajib diisi'),
+    RequiredValidator(errorText: 'Email wajib diisi ya'),
     EmailValidator(errorText: "Format email tidak valid")
   ]);
 
   final passwordValidator = MultiValidator([
-    RequiredValidator(errorText: 'Password wajib diisi'),
-    MinLengthValidator(8, errorText: 'Panjang password minimal 8 karakter'),
+    RequiredValidator(errorText: 'Password wajib diisi ya'),
+    MinLengthValidator(8, errorText: 'Password minimal 8 karakter ya'),
   ]);
 
   final UserProvider _userProvider = UserProvider();
 
   Future<void> _handleDaftar() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        isLoading = true;
-      });
-      try {
-        bool response =
-            await _userProvider.daftar(name!.text, email!.text, password!.text);
+    // if (_formKey.currentState!.validate()) {
+    //   setState(() {
+    //     isLoading = true;
+    //   });
+    //   try {
+    //     bool response =
+    //         await _userProvider.daftar(name!.text, email!.text, password!.text);
 
-        isLoading = false;
-        if (response == true) {
+    //     isLoading = false;
+    //     if (response == true) {
           Navigator.pushReplacementNamed(context, '/survey');
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Terjadi kesalahan.'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      } catch (error) {
-        // handle error here
-        print(error);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Terjadi kesalahan.'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
+      //   } else {
+      //     ScaffoldMessenger.of(context).showSnackBar(
+      //       SnackBar(
+      //         content: Text('Terjadi kesalahan.'),
+      //         backgroundColor: Colors.red,
+      //       ),
+      //     );
+      //   }
+      // } catch (error) {
+      //   // handle error here
+      //   print(error);
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(
+      //       content: Text('Terjadi kesalahan.'),
+      //       backgroundColor: Colors.red,
+      //     ),
+      //   );
+      // }
+    // }
   }
 
   @override
@@ -98,7 +98,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Register',
+                      'Buat Akun',
                       style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w600, fontSize: 24),
                     ),
@@ -106,7 +106,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                       height: 1.h,
                     ),
                     Text(
-                      'Daftar untuk melanjutkan ke fitlife',
+                      'Mulai hidup sehat bersama Fitlife',
                       style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w400, fontSize: 14),
                     ),
@@ -119,7 +119,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomFormField(
-                            hintText: 'Masukan nama anda',
+                            hintText: 'Masukkan nama kamu',
                             labelText: 'Nama',
                             state: name!,
                             inputFormatters: [
@@ -133,7 +133,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                             height: 2.h,
                           ),
                           CustomFormField(
-                            hintText: 'Masukan email anda',
+                            hintText: 'Masukkan email kamu',
                             state: email!,
                             labelText: 'Email',
                             inputType: TextInputType.emailAddress,
@@ -143,7 +143,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                             height: 2.h,
                           ),
                           CustomFormField(
-                              hintText: 'Masukan password',
+                              hintText: 'Masukkan password',
                               state: password!,
                               labelText: 'Password',
                               isSecure: true,
@@ -153,10 +153,9 @@ class _DaftarScreenState extends State<DaftarScreen> {
                           ),
                           RoundedButton(
                               width: double.infinity,
-                              title: 'DAFTAR',
+                              title: 'Buat Akun',
                               style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
                               ),
                               background: primaryColor,
                               height: 54,
@@ -169,14 +168,14 @@ class _DaftarScreenState extends State<DaftarScreen> {
                           Center(
                             child: RichText(
                                 text: TextSpan(
-                                    text: 'Sudah punya akun ? ',
+                                    text: 'Sudah punya akun? ',
                                     style:
                                         blackTextStyle.copyWith(fontSize: 14),
                                     children: [
                                   TextSpan(
-                                    text: 'Login Sekarang',
+                                    text: 'Masuk',
                                     style: GoogleFonts.poppins(
-                                        color: primaryColor,
+                                        color: primaryDarkColor,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500),
                                     recognizer: TapGestureRecognizer()

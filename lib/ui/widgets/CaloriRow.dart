@@ -98,7 +98,7 @@ class CaloriRow extends StatelessWidget {
                 '$kaloriTersedia',
                 style: normalText.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: Colors.white,
+                  color: blackColor,
                 ),
               ),
               const Text(
@@ -106,7 +106,7 @@ class CaloriRow extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 14.0,
-                  color: Colors.white,
+                  color: blackColor,
                 ),
               ),
             ],

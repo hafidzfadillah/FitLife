@@ -78,6 +78,7 @@ class UserProvider extends ChangeNotifier {
   HealthDataModel? get healthData => _healthData;
   // Daftar function
   Future<bool> daftar(String name, String email, String password) async {
+    print('$name, $email, $password');
     setOnSearch(true);
     try {
       final result = await userService.daftar(name, email, password);

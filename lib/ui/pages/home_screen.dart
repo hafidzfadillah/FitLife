@@ -1,6 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -90,22 +95,80 @@ class HomeScreenBody extends StatelessWidget {
         onRefresh: () => refreshHome(context),
         child: Column(
           children: [
-            MainTopBar(),
+            MainTopBar2(
+              title: 'Hi, Sobat',
+            ),
+            Divider(),
             Expanded(
                 child: ListView(
+              shrinkWrap: true,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               children: [
-                DateSelector(
-                  userProvider: userProvider,
+                Container(
+                  color: Colors.white,
+                  child: Row(children: [
+                    SvgPicture.asset(
+                      'assets/images/calendar.svg',
+                      width: 8.h,
+                      height: 8.h,
+                    ),
+                    SizedBox(
+                      width: 2.h,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: Text(
+                                'Hari ke 1',
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )),
+                              Text(
+                                'Lihat detail',
+                                style: GoogleFonts.poppins(
+                                  color: primaryDarkColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Text('1 dari 7 misi hari ini selesai'),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          LinearPercentIndicator(
+                            width: 50.w,
+                            lineHeight: 1.h,
+                            padding: EdgeInsets.all(0),
+                            barRadius: Radius.circular(1.h),
+                            percent: 1 / 7,
+                            backgroundColor: neutral30,
+                            progressColor: primaryColor,
+                          ),
+                        ],
+                      ),
+                    )
+                  ]),
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
-                const UserNutrion(),
+                // DateSelector(
+                //   userProvider: userProvider,
+                // ),
+                // const SizedBox(
+                //   height: 16,
+                // ),
+                UserNutrion(),
                 SizedBox(
                   height: 2.h,
                 ),
-                const MyMisssion()
+                MyMission2()
               ],
             ))
           ],
@@ -171,55 +234,55 @@ class UserNutrion extends StatelessWidget {
 
       return Column(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Kalori tersisa",
-                  style: normalText.copyWith(
-                      fontSize: 14, color: const Color(0xff454545))),
-              const SizedBox(
-                height: 8,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                      (userProvider.myNutrition?.calorieLeft ?? 0) < 0
-                          ? "0"
-                          : userProvider.myNutrition?.calorieLeft.toString() ??
-                              "",
-                      style: normalText.copyWith(
-                          fontSize: 37, fontWeight: FontWeight.w600)),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text("kcal", style: normalText.copyWith(fontSize: 14)),
-                ],
-              )
-            ],
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     Text("Kalori tersisa",
+          //         style: normalText.copyWith(
+          //             fontSize: 14, color: const Color(0xff454545))),
+          // const SizedBox(
+          //   height: 8,
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.start,
+          //   crossAxisAlignment: CrossAxisAlignment.end,
+          //   children: [
+          //     Text(
+          //         (userProvider.myNutrition?.calorieLeft ?? 0) < 0
+          //             ? "0"
+          //             : userProvider.myNutrition?.calorieLeft.toString() ??
+          //                 "",
+          //         style: normalText.copyWith(
+          //             fontSize: 37, fontWeight: FontWeight.w600)),
+          //     const SizedBox(
+          //       width: 8,
+          //     ),
+          //     Text("kcal", style: normalText.copyWith(fontSize: 14)),
+          //   ],
+          // )
+          //   ],
+          // ),
+          SizedBox(
+            height: 2.h,
           ),
-          const SizedBox(
-            height: 12,
-          ),
-          NutritionalBar(
-            carbsPercent:
-                userProvider.myNutrition?.carbPercentage.toDouble() ?? 0,
-            fatPercent: userProvider.myNutrition?.fatPercentage.toDouble() ?? 0,
-            proteinPercent:
-                userProvider.myNutrition?.proteinPercentage.toDouble() ?? 0,
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          NutritionInfoBox(
-            carbs: userProvider.myNutrition?.carbohydrate ?? 0,
-            protein: userProvider.myNutrition?.protein ?? 0,
-            fat: userProvider.myNutrition?.fat ?? 0,
-          ),
-          const SizedBox(
-            height: 16,
-          ),
+          // NutritionalBar(
+          //   carbsPercent:
+          //       userProvider.myNutrition?.carbPercentage.toDouble() ?? 0,
+          //   fatPercent: userProvider.myNutrition?.fatPercentage.toDouble() ?? 0,
+          //   proteinPercent:
+          //       userProvider.myNutrition?.proteinPercentage.toDouble() ?? 0,
+          // ),
+          // const SizedBox(
+          //   height: 16,
+          // ),
+          // NutritionInfoBox(
+          //   carbs: userProvider.myNutrition?.carbohydrate ?? 0,
+          //   protein: userProvider.myNutrition?.protein ?? 0,
+          //   fat: userProvider.myNutrition?.fat ?? 0,
+          // ),
+          // const SizedBox(
+          //   height: 16,
+          // ),
           CaloriRow(
             target: userProvider.myNutrition?.targetCalories ?? 0,
             asupan: userProvider.myNutrition?.intakeCalories ?? 0,
@@ -228,12 +291,179 @@ class UserNutrion extends StatelessWidget {
                 ? 0
                 : userProvider.myNutrition?.calorieLeft ?? 0,
           ),
-          const SizedBox(
-            height: 16,
+          SizedBox(
+            height: 1.h,
           ),
+          Divider()
         ],
       );
     });
+  }
+}
+
+class MyMission2 extends StatelessWidget {
+  MyMission2({Key? key}) : super(key: key);
+  // final List<int> itemList = [1, 2, 3, 4, 5, 6];
+  final List<Map<String, dynamic>> itemList = [
+    {
+      'image': 'assets/images/makan.svg',
+      'mission': 'Catat aktivitas makan',
+      'poin': '15',
+      'color': Color(0xFFFFB029)
+    },
+    {
+      'image': 'assets/images/exercise.svg',
+      'mission': 'Olahraga',
+      'poin': '5',
+      'color': Color(0xFFF9D171)
+    },
+    {
+      'image': 'assets/images/running.svg',
+      'mission': 'Track jogging',
+      'poin': '5',
+      'color': Color(0xFFF39CFF)
+    },
+    {
+      'image': 'assets/images/water.svg',
+      'mission': 'Minum 8 gelas',
+      'poin': '5',
+      'color': Color(0xFF8AD0E6)
+    },
+    {
+      'image': 'assets/images/weight.svg',
+      'mission': 'Catat berat badan',
+      'poin': '5',
+      'color': Color(0xFF8D5EBC)
+    },
+    {
+      'image': 'assets/images/heart.svg',
+      'mission': 'Catat detak jantung',
+      'poin': '5',
+      'color': Color(0xFFFE4C4C)
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: itemList.length,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          if (index > 0 && index % 2 != 0) {
+            if (index + 1 < itemList.length) {
+              Map<String, dynamic> x = itemList[index + 1];
+
+              itemList.removeAt(index + 1);
+
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Mission2(
+                      number: '${itemList[index]['poin']}',
+                      title: '${itemList[index]['mission']}',
+                      color: itemList[index]['color'],
+                      img: itemList[index]['image']),
+                  SizedBox(
+                    width: 3.h,
+                  ),
+                  Mission2(
+                      number: '${x['poin']}',
+                      title: '${x['mission']}',
+                      color: x['color'],
+                      img: x['image']),
+                ],
+              );
+            }
+          }
+
+          return index < itemList.length
+              ? Mission2(
+                  number: '${itemList[index]['poin']}',
+                  title: '${itemList[index]['mission']}',
+                  color: itemList[index]['color'],
+                  img: itemList[index]['image'])
+              : Container();
+        },
+        separatorBuilder: (context, index) => SizedBox(
+          height: 3.h,
+        ),
+      ),
+    );
+  }
+}
+
+class Mission2 extends StatelessWidget {
+  const Mission2(
+      {Key? key,
+      required this.number,
+      required this.title,
+      required this.img,
+      required this.color})
+      : super(key: key);
+  final String number, title, img;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Stack(
+            alignment: Alignment.bottomRight,
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Transform.rotate(
+                    angle: 3 * pi / 4,
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.grey[300],
+                      valueColor: AlwaysStoppedAnimation(Colors.amber),
+                      value: Random().nextDouble(),
+                      strokeWidth: 60,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 42,
+                    ),
+                  ),
+                  CircleAvatar(
+                    child: SvgPicture.asset(
+                      img,
+                    ),
+                    radius: 35,
+                    backgroundColor: color,
+                  )
+                ],
+              ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  SvgPicture.asset('assets/images/badge_coin.svg'),
+                  Text(
+                    number,
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                  )
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.w500),
+          )
+        ],
+      ),
+    );
   }
 }
 

@@ -1,3 +1,5 @@
+import 'package:fitlife/ui/pages/profileScreen.dart';
+import 'package:fitlife/ui/pages/shorts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:fitlife/ui/home/theme.dart';
@@ -15,6 +17,7 @@ class MainPages extends StatefulWidget {
 }
 
 class _MainPagesState extends State<MainPages> {
+  int currentPage = 0;
   PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
 
@@ -26,8 +29,8 @@ class _MainPagesState extends State<MainPages> {
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.sticky_note_2),
-      title: 'Program',
+      icon: Icon(Icons.video_library),
+      title: 'Shorts',
       activeColorPrimary: primaryColor,
       inactiveColorPrimary: Colors.grey,
     ),
@@ -38,18 +41,17 @@ class _MainPagesState extends State<MainPages> {
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.article),
-      title: 'Artikel',
+      icon: Icon(Icons.leaderboard),
+      title: 'Leaderboard',
       activeColorPrimary: primaryColor,
       inactiveColorPrimary: Colors.grey,
     ),
-  ];
-
-  List<Widget> _screens = [
-    HomeScreen(),
-    ProgramScreen(),
-    VitaMartScreen(),
-    ArticleScreen()
+    PersistentBottomNavBarItem(
+      icon: Icon(Icons.badge),
+      title: 'Profil',
+      activeColorPrimary: primaryColor,
+      inactiveColorPrimary: Colors.grey,
+    ),
   ];
 
   @override
@@ -58,7 +60,21 @@ class _MainPagesState extends State<MainPages> {
       context,
       controller: _controller,
       items: _items,
-      screens: _screens,
+      screens: [
+      HomeScreen(),
+      // ProgramScreen(),
+      ShortsScreen(
+        currentPageIndex: currentPage,
+      ),
+      VitaMartScreen(),
+      Center(
+        child: Text('Leaderboard'),
+      ),
+      // ArticleScreen()
+      ProfileScreen()
+
+      ],
+      backgroundColor: _controller.index == 1 ? blackColor : Colors.white,
       navBarStyle:
           NavBarStyle.style3, // Choose the nav bar style with this property.
       itemAnimationProperties: ItemAnimationProperties(
@@ -72,6 +88,11 @@ class _MainPagesState extends State<MainPages> {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
+      onItemSelected: ((value) {
+        setState(() {
+          currentPage = value;
+        });
+      }),
     );
   }
 }

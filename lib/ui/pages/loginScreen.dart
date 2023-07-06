@@ -23,41 +23,41 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
 
   final emailValidator = MultiValidator([
-    RequiredValidator(errorText: 'Email wajib di isi'),
+    RequiredValidator(errorText: 'Email wajib di isi ya'),
     EmailValidator(errorText: "Format email tidak valid")
   ]);
 
   final passwordValidator = MultiValidator([
-    RequiredValidator(errorText: 'Password wajib di isi'),
+    RequiredValidator(errorText: 'Password wajib di isi ya'),
   ]);
   final _formKey = GlobalKey<FormState>();
 
   final UserProvider _userProvider = UserProvider();
 
   Future<void> _handleLogin() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        isLoading = true;
-      });
-      try {
-        bool response = await _userProvider.login(email!.text, password!.text);
+    // if (_formKey.currentState!.validate()) {
+    //   setState(() {
+    //     isLoading = true;
+    //   });
+    //   try {
+    //     bool response = await _userProvider.login(email!.text, password!.text);
 
-        isLoading = false;
-        if (response == true) {
-          Navigator.pushNamed(context, '/home');
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Email atau password salah'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      } catch (error) {
-        // handle error here
+    //     isLoading = false;
+    //     if (response == true) {
+    Navigator.pushNamed(context, '/home');
+    // } else {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(
+    //       content: Text('Email atau password salah'),
+    //       backgroundColor: Colors.red,
+    //     ),
+    //   );
+    // }
+    // } catch (error) {
+    //   // handle error here
 
-      }
-    }
+    // }
+    // }
   }
 
   @override
@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 1.h,
                     ),
-                    Text('Masuk untuk melanjutkan ke fitlife',
+                    Text('Selamat datang kembali, sobat!',
                         style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomFormField(
-                            hintText: 'Masukan email anda',
+                            hintText: 'Masukkan email kamu',
                             state: email!,
                             labelText: 'Email',
                             inputType: TextInputType.emailAddress,
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 2.h,
                           ),
                           CustomFormField(
-                              hintText: 'Masukan password',
+                              hintText: 'Masukkan password',
                               state: password!,
                               labelText: 'Password',
                               isSecure: true,
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 "Lupa password?",
                                 style: secondaryText.copyWith(
                                     fontSize: captionSize,
-                                    fontWeight: FontWeight.w500),
+                                    fontWeight: FontWeight.w600),
                                 textAlign: TextAlign.right,
                               ),
                             ],
@@ -138,11 +138,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 4.h,
                           ),
                           RoundedButton(
-                            title: 'MASUK',
+                            title: 'Masuk',
                             style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
+                              color: Colors.black,
+                            ),
                             background: primaryColor,
                             onClick: () {
                               _handleLogin();
@@ -161,9 +160,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         blackTextStyle.copyWith(fontSize: 14),
                                     children: [
                                   TextSpan(
-                                    text: 'Daftar Sekarang',
+                                    text: 'Yuk Daftar',
                                     style: GoogleFonts.poppins(
-                                        color: primaryColor,
+                                        color: primaryDarkColor,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500),
                                     recognizer: TapGestureRecognizer()
