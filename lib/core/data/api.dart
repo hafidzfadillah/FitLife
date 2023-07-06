@@ -1,6 +1,6 @@
 class Api {
   // Base Api Endpoint
-  static const _baseServer = "https://vita.akutegar.com/api/v1";
+  static const _baseServer = "https://fitlife.akutegar.com/api/v1";
 
   /// * -------------------
   ///  * VitaMart Endpoint
