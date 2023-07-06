@@ -73,4 +73,7 @@ class Api {
   String getExercise = "$_baseServer/exercise";
   String searchExercise = "$_baseServer/exercise/search";
   String storeExercise = "$_baseServer/exercise-track/store";
+
+
+  String convertBamboo = "$_baseServer/convertbamboo";
 }

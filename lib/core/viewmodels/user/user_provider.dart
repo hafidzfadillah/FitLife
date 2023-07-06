@@ -100,6 +100,8 @@ class UserProvider extends ChangeNotifier {
     setOnSearch(true);
     try {
       final result = await userService.login(email, password);
+
+      print(result.data);
       if (result.data.id != null) {
         _user = result.data;
         return true;
@@ -187,11 +189,14 @@ class UserProvider extends ChangeNotifier {
     await Future.delayed(const Duration(milliseconds: 100));
     setOnSearch(true);
 
-    final selectedDate = date ?? DateTime.now();
-    final formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+    // final selectedDate = date ?? DateTime.now();
+    // final formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+    await initializeDateFormatting();
 
     try {
       final result = await userService.getUserMission(date: date);
+
+      print(result);
 
       if (result.data!.isNotEmpty) {
         _myMission = result.data;
@@ -651,6 +656,20 @@ class UserProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> convertBamboo(int coin) async {
+
+    try {
+      await userService.convertBamboo(coin);
+
+      notifyListeners();
+    } catch (e, stacktrace) {
+      debugPrint("Error: ${e.toString()}");
+      debugPrint("Stacktrace: ${stacktrace.toString()}");
+    }
+    notifyListeners();
+  }
+
 
   // Set event login
   void setOnSearch(bool value) {

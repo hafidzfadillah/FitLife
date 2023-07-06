@@ -15,6 +15,7 @@ class MissionCard extends StatelessWidget {
     required this.icon,
     this.backgroundColor,
     required this.screen,
+    required this.route,
   }) : super(key: key);
 
   final double? progress;
@@ -27,36 +28,38 @@ class MissionCard extends StatelessWidget {
   final String icon;
   final int? backgroundColor;
   final String screen;
+  final String route;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        String titleLower = title.toLowerCase();
+Navigator.of(context, rootNavigator: true).pushNamed(route);
+        // String titleLower = title.toLowerCase();
 
-        if (titleLower == 'catat aktivitas makanan') {
-          Navigator.of(context, rootNavigator: true).pushNamed('/food-record')
-            ..then((value) {
-              if (value != null && value == true) {
-                // Refresh widget disini
-              }
-            });
-        } else if (titleLower == 'catat aktivitas olahraga') {
-          Navigator.of(context, rootNavigator: true).pushNamed('/record-sport');
-        } else if (titleLower == 'catat aktivitas lari/ jalan') {
-          Navigator.of(context, rootNavigator: true)
-              .pushNamed('/record-sport-run');
-        } else if (titleLower == 'catat asupan minum') {
-          Navigator.of(context, rootNavigator: true).pushNamed('/water-record');
-        } else if (titleLower == 'catat berat badan') {
-          Navigator.of(context, rootNavigator: true)
-              .pushNamed('/record-weight');
-        } else if (titleLower == 'check kesehatan anda') {
-          Navigator.of(context, rootNavigator: true).pushNamed('/vita-pulse');
-        } else {
-          Navigator.of(context, rootNavigator: true)
-              .pushNamed(screen.toLowerCase());
-        }
+        // if (titleLower == 'catat aktivitas makanan') {
+        //   Navigator.of(context, rootNavigator: true).pushNamed('/food-record')
+        //     ..then((value) {
+        //       if (value != null && value == true) {
+        //         // Refresh widget disini
+        //       }
+        //     });
+        // } else if (titleLower == 'catat aktivitas olahraga') {
+        //   Navigator.of(context, rootNavigator: true).pushNamed('/record-sport');
+        // } else if (titleLower == 'catat aktivitas lari/ jalan') {
+        //   Navigator.of(context, rootNavigator: true)
+        //       .pushNamed('/record-sport-run');
+        // } else if (titleLower == 'catat asupan minum') {
+        //   Navigator.of(context, rootNavigator: true).pushNamed('/water-record');
+        // } else if (titleLower == 'catat berat badan') {
+        //   Navigator.of(context, rootNavigator: true)
+        //       .pushNamed('/record-weight');
+        // } else if (titleLower == 'check kesehatan anda') {
+        //   Navigator.of(context, rootNavigator: true).pushNamed('/vita-pulse');
+        // } else {
+        //   Navigator.of(context, rootNavigator: true)
+        //       .pushNamed(screen.toLowerCase());
+        // }
       },
       child: Container(
         padding: EdgeInsets.all(16),

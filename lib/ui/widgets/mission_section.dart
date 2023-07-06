@@ -115,11 +115,12 @@ class Mission extends StatelessWidget {
                         title: e.name,
                         target: e.target,
                         current: e.current,
-                        pointReward: e.point,
+                        pointReward: e.coin,
                         unit: e.typeTarget,
                         icon: e.icon,
                         backgroundColor: e.colorTheme,
                         screen: e.name,
+                        route:  e.route,
                       ))
                   .toList(),
             ),

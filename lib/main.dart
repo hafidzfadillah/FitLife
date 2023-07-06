@@ -19,14 +19,16 @@ import 'package:intl/intl.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:camera/camera.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 List<CameraDescription>? cameras;
 
 void main() async {
-  // Atur status bar menjadi transparan
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [SystemUiOverlay.bottom]);
+  // // Atur status bar menjadi transparan
+  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+  //     overlays: [SystemUiOverlay.bottom]);
 
+  // await initializeDateFormatting();
 
   WidgetsFlutterBinding.ensureInitialized();
   Intl.defaultLocale = 'id'; // or any other locale you want to use

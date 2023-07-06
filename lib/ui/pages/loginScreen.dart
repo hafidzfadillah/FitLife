@@ -42,9 +42,11 @@ class _LoginScreenState extends State<LoginScreen> {
       try {
         bool response = await _userProvider.login(email!.text, password!.text);
 
-        isLoading = false;
+          setState(() {
+          isLoading = false;
+        });
         if (response == true) {
-          Navigator.pushNamed(context, '/home');
+          Navigator.pushNamed(context, '/tempory');
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -69,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: CustomBackButton(
+              iconColor:  Color(0xff707070),
               onClick: () {
                 Navigator.pop(context);
               },
@@ -138,11 +141,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 4.h,
                           ),
                           RoundedButton(
-                            title: 'MASUK',
+                            title: 'Masuk ',
                             style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
                             background: primaryColor,
                             onClick: () {
                               _handleLogin();
@@ -161,11 +164,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                         blackTextStyle.copyWith(fontSize: 14),
                                     children: [
                                   TextSpan(
-                                    text: 'Daftar Sekarang',
+                                    text: ' Daftar Sekarang',
                                     style: GoogleFonts.poppins(
                                         color: primaryColor,
                                         fontSize: 14,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.w600),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         Navigator.pushNamed(

@@ -166,22 +166,22 @@ class _UserDrinkProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
-      // if (userProvider.myMission == null && !userProvider.onSearch) {
-      //   userProvider.getMyMission();
-      //   return const Center(child: CircularProgressIndicator());
-      // }
+      if (userProvider.myMission == null && !userProvider.onSearch) {
+        userProvider.getMyMission();
+        return const Center(child: CircularProgressIndicator());
+      }
 
-      // if (userProvider.myMission == null && userProvider.onSearch) {
-      //   return const Center(child: CircularProgressIndicator());
-      // }
+      if (userProvider.myMission == null && userProvider.onSearch) {
+        return const Center(child: CircularProgressIndicator());
+      }
 
-      // final mission = userProvider.myMission!
-      //     .firstWhere((m) => m.name == "Catat asupan Minum");
-      // final int currentDrink = mission.current;
+      final mission = userProvider.myMission!
+          .firstWhere((m) => m.name == "Catat Aktivitas Minum");
+      final int currentDrink = mission.current;
 
       return Center(
         child: DrinkProgressBar(
-            currentDrink: 2, goalDrink: 8, width: 200 , color: Color(0xff6FB6E1) ),
+            currentDrink: currentDrink, goalDrink: 8, width: 200 , color: Color(0xff6FB6E1) ),
       );
     });
   }
@@ -193,41 +193,34 @@ class _UserHistoryDrink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
-      // if (userProvider.userDrink == null && !userProvider.onSearch) {
-      //   userProvider.getUserHistoryDrink();
-      //   return const Center(child: CircularProgressIndicator());
-      // }
+      if (userProvider.userDrink == null && !userProvider.onSearch) {
+        userProvider.getUserHistoryDrink();
+        return const Center(child: CircularProgressIndicator());
+      }
 
-      // if (userProvider.userDrink == null && userProvider.onSearch) {
-      //   return const Center(child: CircularProgressIndicator());
-      // }
-      return HistoryCard(
-        title: 'Catat Asup Minum',
-        date: DateTime.now().toString(),
-        backgroundColor:  Color(0XFFEEF7FF),
-        urlIcon:  "assets/images/drink-water.png",
-            
-        value: 1,
-        unit: 'Gelas',
-        withTarget: true,
-        target: 8,
+      if (userProvider.userDrink == null && userProvider.onSearch) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+     
+       
+      return ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: userProvider.userDrink?.length,
+        itemBuilder: (context, index) {
+          return HistoryCard(
+            title: 'Catat Asup Minum',
+                    date: DateFormat('dd MMMM yyyy, HH:mm:ss')
+                .format(userProvider.userDrink![index].createdAt),
+            value: userProvider.userDrink![index].value,
+            urlIcon: "assets/images/drink-water.png",
+            unit: 'Gelas',
+            withTarget: true,
+            target: 8,
+          );
+        },
       );
-      // return ListView.builder(
-      //   shrinkWrap: true,
-      //   physics: const NeverScrollableScrollPhysics(),
-      //   itemCount: userProvider.userDrink?.length,
-      //   itemBuilder: (context, index) {
-      //     return HistoryCard(
-      //       title: 'Catat Asup Minum',
-      //       date: DateFormat('dd MMMM yyyy, HH:mm:ss')
-      //           .format(userProvider.userDrink![index].createdAt),
-      //       value: 1,
-      //       unit: 'Gelas',
-      //       withTarget: true,
-      //       target: 8,
-      //     );
-      //   },
-      // );
     });
   }
 }

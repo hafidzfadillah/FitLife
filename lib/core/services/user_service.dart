@@ -56,6 +56,9 @@ class UserService {
     APIResponse response = await api.post(api.endpoint.login, data: data);
 
     final userData = response.data;
+    print(userData);
+
+    print(userData?['access_token'] ?? 'no token');
 
     // Save user data to shared preference.
     await saveUserData(userData!);
@@ -112,8 +115,10 @@ class UserService {
   Future<ApiResultList<MyMissionModel>> getUserMission({DateTime? date}) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('access_token');
-
+  
     String dateStr = DateFormat('yyyy-MM-dd').format(date ?? DateTime.now());
+
+    print(dateStr);
 
     APIResponse response = await api.get(api.endpoint.getDailyData,
         useToken: true, token: token, data: {"date": dateStr});
@@ -403,5 +408,18 @@ class UserService {
 
     return ApiResult<TransactionModel>.fromJson(
         response.data, (data) => TransactionModel.fromJson(data), "data");
+  }
+
+
+  Future<void>  convertBamboo(int coin ) async {
+      final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('access_token');
+
+    APIResponse response = await api.post(api.endpoint.convertBamboo,
+        useToken: true, token: token, data: {"coin": coin});
+
+
+
+
   }
 }
