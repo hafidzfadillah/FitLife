@@ -1,6 +1,6 @@
 class ApiResult<T extends Serializable> {
   String? status;
-   String? message;
+  String? message;
   T data;
   ApiResult({
     required this.status,
@@ -10,6 +10,8 @@ class ApiResult<T extends Serializable> {
 
   factory ApiResult.fromJson(Map<String, dynamic>? json,
       Function(Map<String, dynamic>) create, String field) {
+    print('RESULTING: $json');
+    print(field);
     return ApiResult<T>(
       status: json?['status'] ?? '',
       message: json?['message'] ?? '',
@@ -31,15 +33,15 @@ class ApiResultList<T extends Serializable> {
   String? message;
   List<T>? data;
 
-  ApiResultList({this.status ,
-  this.message,
-  
-  this.data});
+  ApiResultList({this.status, this.message, this.data});
 
   factory ApiResultList.fromJson(
       Map<String, dynamic>? json, Function(List<dynamic>) build, String field) {
+    print('RESULTING: $json');
+    print(field);
+
     return ApiResultList<T>(
-      status: json?['status'] ?? 'false',
+      status: json?['status'].toString() ?? 'false',
       message: json?['message'] ?? '',
       data: json?[field] != null && json?[field] is List
           ? build(json?[field])

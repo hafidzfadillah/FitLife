@@ -31,7 +31,7 @@ class WeightIndicator extends StatelessWidget {
                 style: GoogleFonts.poppins(
                     fontSize: captionSize,
                     color: label.toLowerCase().contains('under')
-                        ? Colors.amber
+                        ? Colors.orange
                         : Colors.grey),
               ),
               Text(
@@ -39,7 +39,7 @@ class WeightIndicator extends StatelessWidget {
                 style: GoogleFonts.poppins(
                     fontSize: captionSize,
                     color: label.toLowerCase().contains('normal')
-                        ? primaryColor
+                        ? primaryDarkColor
                         : Colors.grey),
               ),
               Text(
@@ -47,7 +47,7 @@ class WeightIndicator extends StatelessWidget {
                 style: GoogleFonts.poppins(
                     fontSize: captionSize,
                     color: label.toLowerCase().contains('over')
-                        ? Colors.amber
+                        ? Colors.orange
                         : Colors.grey),
               ),
               Text(

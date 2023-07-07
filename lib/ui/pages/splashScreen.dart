@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -27,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    initConnectivity();
+    // initConnectivity();
 
     // _connectivitySubscription =
     //     _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
@@ -69,11 +70,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   getInit() async {
-    Timer(Duration(seconds: 3), () {
-      if (_connectionStatus == ConnectivityResult.none) {
-        Navigator.pushNamed(context, '/no-internet');
-      }
-    });
+    _connectionStatus = await _connectivity.checkConnectivity();
+
+    if (_connectionStatus == ConnectivityResult.none) {
+      // Navigator.pushNamed(context, '/no-internet');
+      EasyLoading.showError('Tidak ada koneksi');
+      return;
+    }
 
     // await Provider.of<MapProvider>(context, listen: false).initLocation();
 
@@ -86,12 +89,12 @@ class _SplashScreenState extends State<SplashScreen> {
     //     .getAvailableVoucher();
 
     final prefs = await SharedPreferences.getInstance();
-    prefs.get('token');
+    String token = prefs.getString('token') ?? 'null';
 
-    print(prefs);
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    print('tkn: $token');
+    // SharedPreferences localStorage = await SharedPreferences.getInstance();
 
-    Timer(Duration(seconds: 3),
+    Timer(Duration(seconds: 2),
         () => Navigator.pushReplacementNamed(context, '/on-boarding'));
   }
 
@@ -138,9 +141,9 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           Align(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 4.h),
-              child: LoadingAnimationWidget.waveDots(color: Colors.white, size: 50)
-            ),
+                padding: EdgeInsets.only(bottom: 4.h),
+                child: LoadingAnimationWidget.waveDots(
+                    color: Colors.white, size: 50)),
             alignment: Alignment.bottomCenter,
           )
         ]),

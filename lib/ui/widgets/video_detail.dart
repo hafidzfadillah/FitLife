@@ -3,6 +3,7 @@ import 'package:fitlife/ui/home/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/models/video/video_model.dart';
 import '../pages/shorts_screen.dart';
 
 class VideoDetail extends StatelessWidget {
@@ -33,7 +34,7 @@ class VideoDetail extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           ExpandableText(
-            video.caption,
+            video.description ?? 'Belum ada deskripsi',
             expandText: 'Selengkapnya',
             collapseText: 'Sembunyikan',
             expandOnTextTap: false,

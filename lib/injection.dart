@@ -1,3 +1,4 @@
+import 'package:fitlife/core/services/video_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:fitlife/core/data/api.dart';
 import 'package:fitlife/core/data/base_api.dart';
@@ -39,4 +40,5 @@ Future<void> setupLocator() async {
   locator.registerSingleton(ChatService(locator<BaseAPI>()));
   locator.registerSingleton(ProgramService(locator<BaseAPI>()));
   locator.registerSingleton(ExerciseService(locator<BaseAPI>()));
+  locator.registerSingleton(VideoService(locator<BaseAPI>()));
 }

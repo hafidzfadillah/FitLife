@@ -1,6 +1,6 @@
 class Api {
   // Base Api Endpoint
-  static const _baseServer = "https://vita.akutegar.com/api/v1";
+  static const _baseServer = "https://fitlife.akutegar.com/api/v1";
 
   /// * -------------------
   ///  * VitaMart Endpoint
@@ -23,7 +23,8 @@ class Api {
   String login = "$_baseServer/auth/login";
   String register = "$_baseServer/auth/register";
   String getUser = "$_baseServer/auth/me";
-  String getDailyData = "$_baseServer/getDailyData";
+  // String getDailyData = "$_baseServer/getDailyData";
+  String getDailyData = "$_baseServer/mymission";
   String storeDrink = "$_baseServer/drink/store";
   String historyDrink = "$_baseServer/drink/history";
   String historyFood = "$_baseServer/foods-track/history";
@@ -40,6 +41,7 @@ class Api {
   /// * Article Endpoint
 
   String getArticles = "$_baseServer/articles";
+  String getVideos = "$_baseServer/reels";
 
   /// * -------------------
   /// * fOOD

@@ -1,3 +1,7 @@
+import 'package:fitlife/ui/pages/leaderboard_screen.dart';
+import 'package:fitlife/ui/pages/shop_screen.dart';
+import 'package:fitlife/ui/pages/topup_bamboo_screen.dart';
+import 'package:fitlife/ui/pages/topup_bamboo_succes_screen.dart';
 import 'package:flutter/material.dart';
 import '../core/models/survey/survey_model.dart';
 import '../ui/pages/FoodDetailScreen.dart';
@@ -34,17 +38,19 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
 
+    print(settings.name);
+
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => SplashScreen());
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case '/on-boarding':
-        return MaterialPageRoute(builder: (_) => OnBoardingScreen());
+        return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
       case '/login':
-        return MaterialPageRoute(builder: (_) => LoginScreen());
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       case '/register':
-        return MaterialPageRoute(builder: (_) => DaftarScreen());
+        return MaterialPageRoute(builder: (_) => const DaftarScreen());
       case '/survey':
-        return MaterialPageRoute(builder: (_) => SurveyScreen());
+        return MaterialPageRoute(builder: (_) => const SurveyScreen());
       case '/loading-survey':
         return MaterialPageRoute(builder: (_) => LoadingScreen());
       case SurveyResultScreen.routeName:
@@ -52,30 +58,30 @@ class RouteGenerator {
             builder: (_) => SurveyResultScreen(result: args as SurveyModel));
 
       case '/home':
-        return MaterialPageRoute(builder: (_) => MainPages());
+        return MaterialPageRoute(builder: (_) => const MainPages());
       case '/chatbot':
-        return MaterialPageRoute(builder: (_) => ChatbotScreen());
+        return MaterialPageRoute(builder: (_) => const ChatbotScreen());
       case '/food-record':
-        return MaterialPageRoute(builder: (_) => RecordFoodScreen());
+        return MaterialPageRoute(builder: (_) => const RecordFoodScreen());
       case '/food-detail':
-        return MaterialPageRoute(builder: (_) => FoodDetailScreen());
+        return MaterialPageRoute(builder: (_) => const FoodDetailScreen());
       case '/food-list':
         return MaterialPageRoute(
-            builder: (_) => FoodListScreen(
+            builder: (_) => const FoodListScreen(
                   defaultMealType: 'Makan Pagi',
                 ));
       case '/article':
-        return MaterialPageRoute(builder: (_) => ArticleScreen());
+        return MaterialPageRoute(builder: (_) => const ArticleScreen());
 
       case '/program':
-        return MaterialPageRoute(builder: (_) => ProgramScreen());
+        return MaterialPageRoute(builder: (_) => const ProgramScreen());
 
       case '/water-record':
-        return MaterialPageRoute(builder: (_) => RecordWaterScreen());
+        return MaterialPageRoute(builder: (_) => const RecordWaterScreen());
       case '/vita-pulse':
-        return MaterialPageRoute(builder: (_) => VitaPulseScreen());
+        return MaterialPageRoute(builder: (_) => const VitaPulseScreen());
       case '/record-sport':
-        return MaterialPageRoute(builder: (_) => RecordSportScreen());
+        return MaterialPageRoute(builder: (_) => const RecordSportScreen());
       case '/list-sport':
         return MaterialPageRoute(
             builder: (_) => ListSport(data: args as Map<String, dynamic>));
@@ -101,7 +107,16 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const RecordRunScreen());
       case '/record-add-step':
         return MaterialPageRoute(builder: (_) => const StepAddScren());
+      case '/shop':
+        return MaterialPageRoute(builder: (_) => const ShopScreen());
 
+      case '/topup':
+        return MaterialPageRoute(builder: (_) => TopUpBambooScreen());
+      case '/topup-bamboo-success':
+        return MaterialPageRoute(
+            builder: (_) => const TopUpBambooSuccessScreen());
+      case '/leadeboard':
+        return MaterialPageRoute(builder: (_) => LeaderboardScreen());
       // case '/product-detail':
       //   return MaterialPageRoute(builder: (_) => ProductDetailScreen());
       // case '/cart':
@@ -145,10 +160,10 @@ class RouteGenerator {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('error'),
+          title: const Text('error'),
         ),
-        body: Center(
-          child: Text('Erorr'),
+        body: const Center(
+          child: const Text('Erorr'),
         ),
       );
     });

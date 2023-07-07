@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -35,29 +38,22 @@ class _LoginScreenState extends State<LoginScreen> {
   final UserProvider _userProvider = UserProvider();
 
   Future<void> _handleLogin() async {
-    // if (_formKey.currentState!.validate()) {
-    //   setState(() {
-    //     isLoading = true;
-    //   });
-    //   try {
-    //     bool response = await _userProvider.login(email!.text, password!.text);
+    if (_formKey.currentState!.validate()) {
+      EasyLoading.show(status: 'Mohon tunggu');
+      try {
+        bool response = await _userProvider.login(email!.text, password!.text);
 
-    //     isLoading = false;
-    //     if (response == true) {
-    Navigator.pushNamed(context, '/home');
-    // } else {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(
-    //       content: Text('Email atau password salah'),
-    //       backgroundColor: Colors.red,
-    //     ),
-    //   );
-    // }
-    // } catch (error) {
-    //   // handle error here
+        if (response == true) {
+          EasyLoading.showSuccess('Selamat datang kembali!');
+          Navigator.pushNamed(context, '/home');
+        } else {
+          EasyLoading.showError('Email atau password salah');
+        }
+      } catch (error) {
+        // handle error here
 
-    // }
-    // }
+      }
+    }
   }
 
   @override
@@ -160,15 +156,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                         blackTextStyle.copyWith(fontSize: 14),
                                     children: [
                                   TextSpan(
-                                    text: 'Yuk Daftar',
+                                    text: 'Buat sekarang',
                                     style: GoogleFonts.poppins(
                                         color: primaryDarkColor,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        Navigator.pushNamed(
-                                            context, '/register');
+                                        EasyLoading.show(
+                                          status: 'Pandan siap-siap dulu..',
+                                        );
+                                        Timer(Duration(seconds: 2), () {
+                                          EasyLoading.dismiss();
+                                          Navigator.pushNamed(
+                                              context, '/survey');
+                                        });
                                       },
                                   )
                                 ])),

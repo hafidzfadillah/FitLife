@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fitlife/global/cons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intro_slider/intro_slider.dart';
@@ -30,16 +33,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   void _checkIfLoggedIn() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var token = localStorage.getString('access_token');
+    String token = localStorage.getString('access_token') ?? '0';
     print('onboarding $token');
-    if (token != null) {
+    if (token != null && token != '0') {
       if (mounted) {
         setState(() {
           isAuth = true;
         });
         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
 
-        // Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
       }
     }
   }
@@ -121,7 +123,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       style: GoogleFonts.poppins(color: Colors.black),
                       background: primaryColor,
                       onClick: () {
-                        Navigator.pushNamed(context, '/survey');
+                        EasyLoading.show(
+                          status: 'Pandan siap-siap dulu..',
+                        );
+                        Timer(Duration(seconds: 2), () {
+                          EasyLoading.dismiss();
+                          Navigator.pushNamed(context, '/survey');
+                        });
                       }),
                   SizedBox(
                     height: 2.h,

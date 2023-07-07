@@ -101,6 +101,16 @@ class BaseAPI implements BaseAPIImpl {
   }
 
   Future<APIResponse> _parseResponse(Response? response) async {
+    print('Parse rsp: (${response?.statusCode}) $response');
+    if (response?.data is List<dynamic>) {
+      Map<String, dynamic> data = {'data': response?.data};
+
+      return APIResponse.fromJson({
+        'statusCode': response?.statusCode,
+        'data': data,
+      });
+    }
+
     return APIResponse.fromJson({
       'statusCode': response?.statusCode,
       'data': response?.data,

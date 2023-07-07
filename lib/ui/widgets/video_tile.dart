@@ -7,6 +7,7 @@ import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../core/models/video/video_model.dart';
 import '../pages/shorts_screen.dart';
 
 class VideoTile extends StatefulWidget {
@@ -34,7 +35,7 @@ class _VideoTileState extends State<VideoTile> {
   @override
   void initState() {
     _videoPlayerController =
-        VideoPlayerController.asset('assets/video/${widget.video.videoUrl}');
+        VideoPlayerController.network('${widget.video.videoUrl}');
     _initVideoPlayer = _videoPlayerController.initialize();
     _videoPlayerController.setLooping(true);
     // TODO: implement initState

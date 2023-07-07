@@ -15,10 +15,11 @@ class UserModel extends Serializable {
   final String goal;
   final int targetWeight;
   final num recommendCalories;
-  final int point;
-  final int isPremium;
-  final DateTime? premiumExpiredAt;
-  final int credit;
+  final int bamboo;
+  final int coin;
+  final int isVip;
+  final int isSurveyed;
+  final DateTime? vipExpiredAt;
 
   UserModel({
     required this.id,
@@ -35,35 +36,38 @@ class UserModel extends Serializable {
     required this.goal,
     required this.targetWeight,
     required this.recommendCalories,
-    required this.point,
-    required this.isPremium,
-    this.premiumExpiredAt,
-    required this.credit,
+    required this.coin,
+    required this.bamboo,
+    required this.isSurveyed,
+    required this.isVip,
+    required this.vipExpiredAt,
+    
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json['id'] ?? 0,
-        name: json['name'] ?? "",
-        email: json['email'] ?? "",
+        name: json['name'] ?? "Sobat",
+        email: json['email'] ?? "email",
         emailVerifiedAt: json['email_verified_at'] != null
             ? DateTime.parse(json['email_verified_at'])
             : null,
-        createdAt: DateTime.parse(json['created_at']),
-        updatedAt: DateTime.parse(json['updated_at']),
+        createdAt: DateTime.parse(json['created_at'] ?? '00000000'),
+        updatedAt: DateTime.parse(json['updated_at'] ?? '00000000'),
         age: json['age'] ?? 0,
-        gender: json['gender'] ?? "",
+        gender: json['gender'] ?? "-",
         height: json['height'] ?? 0,
         weight: json['weight'] ?? 0,
         bmi: json['bmi'] ?? 0.0,
         goal: json['goal'] ?? "",
         targetWeight: json['target_weight'] ?? 0,
         recommendCalories: json['recommend_calories'] ?? 0,
-        point: json['point'] ?? 0,
-        isPremium: json['is_premium'] ?? 0,
-        premiumExpiredAt: json['premium_expired_at'] != null
-            ? DateTime.parse(json['premium_expired_at'])
+        coin: json['coin'] ?? 0,
+        isVip: json['vip'] ?? 0,
+        vipExpiredAt: json['vip_expired_at'] != null
+            ? DateTime.parse(json['vip_expired_at'])
             : null,
-        credit: json['credit'] ?? 0,
+        bamboo: json['bamboo'] ?? 0,
+        isSurveyed: json['is_surveyed'] ?? 0
       );
 
   @override
@@ -82,9 +86,10 @@ class UserModel extends Serializable {
         "goal": goal,
         "target_weight": targetWeight,
         "recommend_calories": recommendCalories,
-        "point": point,
-        "is_premium": isPremium,
-        "premium_expired_at": premiumExpiredAt?.toIso8601String(),
-        "credit": credit,
+        "coin": coin,
+        "is_vip": isVip,
+        "vip_expired_at": vipExpiredAt?.toIso8601String(),
+        "bamboo": bamboo,
+        "is_surveyed":isSurveyed
       };
 }

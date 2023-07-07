@@ -256,7 +256,7 @@ class RecordSportBody extends StatelessWidget {
                   ),
                   ExerciseSchedule(
                     exercises: _exercises,
-                    isPremium: userProv.user?.isPremium ?? 0,
+                    isPremium: userProv.user?.isVip ?? 0,
                   ),
                   SizedBox(
                     height: 8.h,

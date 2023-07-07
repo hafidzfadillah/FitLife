@@ -5,6 +5,7 @@ import 'package:fitlife/core/viewmodels/user/user_provider.dart';
 import 'package:fitlife/ui/home/theme.dart';
 import 'package:fitlife/ui/pages/premium_screen.dart';
 import 'package:fitlife/ui/widgets/MissionCard.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Mission extends StatelessWidget {
   Mission({Key? key, required this.myMission, required this.isPremium})
@@ -32,97 +33,74 @@ class Mission extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Menampilkan jumlah tugas yang belum selesai
-            Row(
-              children: [
-                Text(
-                  "Misi kamu hari ini ",
-                  style: normalText.copyWith(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: const Color(0xff333333),
-                  ),
-                ),
-                Text(
-                  "${myMission?.where((element) => element.status == 'finish').length ?? 0}/${myMission?.length}",
-                  style: normalText.copyWith(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: const Color(0xff333333),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            if (isPremium == 0)
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed('/premium');
-                },
-                child: Container(
-                    padding: EdgeInsets.all(16),
-                    margin: EdgeInsets.only(bottom: 10),
-                    decoration: BoxDecoration(
-                      color: Color(0xffFFFAEA),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
+
+            ListView.separated(
+              shrinkWrap: true,
+              itemCount: myMission!.length,
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                if (index > 0 && index % 2 != 0) {
+                  if (index + 1 < myMission!.length) {
+                    MyMissionModel x = myMission![index + 1];
+
+                    myMission!.removeAt(index + 1);
+
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/images/premium.png',
-                          width: 50,
-                          height: 50,
+                        MissionCard(
+                          progress:
+                              myMission![index].percentageSuccess.toDouble(),
+                          missionColor: myMission![index].colorTheme,
+                          title: myMission![index].name,
+                          target: myMission![index].target,
+                          current: myMission![index].current,
+                          pointReward: myMission![index].coin,
+                          unit: myMission![index].typeTarget,
+                          icon: myMission![index].icon,
+                          backgroundColor: myMission![index].colorTheme,
+                          screen: myMission![index].name,
                         ),
                         SizedBox(
-                          width: 15,
+                          width: 3.h,
                         ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Text(
-                                  "Yuk gabung ke Vita Premium banyak banget benefitnya",
-                                  style: normalText.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.7,
-                                    color: const Color(0xff333333),
-                                  )),
-                              const SizedBox(height: 8),
-                              Text(
-                                "Coba Berbagai fitur AI dari kita seperti Vita bot , Vita Virtual Coach  dan Exercie plan",
-                                style: normalText.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff333333),
-                                ),
-                              )
-                            ],
-                          ),
+                        MissionCard(
+                          progress: x.percentageSuccess.toDouble(),
+                          missionColor: x.colorTheme,
+                          title: x.name,
+                          target: x.target,
+                          current: x.current,
+                          pointReward: x.coin,
+                          unit: x.typeTarget,
+                          icon: x.icon,
+                          backgroundColor: x.colorTheme,
+                          screen: x.name,
                         )
                       ],
-                    )),
+                    );
+                  }
+                }
+
+                return index < myMission!.length
+                    ? MissionCard(
+                        progress:
+                            myMission![index].percentageSuccess.toDouble(),
+                        missionColor: myMission![index].colorTheme,
+                        title: myMission![index].name,
+                        target: myMission![index].target,
+                        current: myMission![index].current,
+                        pointReward: myMission![index].coin,
+                        unit: myMission![index].typeTarget,
+                        icon: myMission![index].icon,
+                        backgroundColor: myMission![index].colorTheme,
+                        screen: myMission![index].route,
+                      )
+                    : Container();
+              },
+              separatorBuilder: (context, index) => SizedBox(
+                height: 3.h,
               ),
-
-            const SizedBox(height: 16),
-
-            // Menampilkan card misi
-            Column(
-              children: myMission!
-                  .map((e) => MissionCard(
-                        progress: e.percentageSuccess.toDouble(),
-                        missionColor: e.colorTheme,
-                        title: e.name,
-                        target: e.target,
-                        current: e.current,
-                        pointReward: e.point,
-                        unit: e.typeTarget,
-                        icon: e.icon,
-                        backgroundColor: e.colorTheme,
-                        screen: e.name,
-                      ))
-                  .toList(),
-            ),
+            )
           ],
         ),
       ],

@@ -50,15 +50,16 @@ class ProfileBody extends StatelessWidget {
   const ProfileBody({
     super.key,
   });
-
-  @override
-  Widget build(BuildContext context) {
+  
     Future<void> refreshHome(BuildContext context) async {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
 
       userProvider.clearUserData();
       ConnectionProvider.instance(context).setConnection(true);
     }
+
+  @override
+  Widget build(BuildContext context) {
 
     return Consumer2<ConnectionProvider, UserProvider>(
         builder: (context, connectionProv, userProvider, child) {
@@ -86,8 +87,6 @@ class ProfileBody extends StatelessWidget {
         // if the categories are being searched, show a skeleton loading
         return Center(child: const CircularProgressIndicator());
       }
-      String name = userProvider.user?.name ?? ""; // mengambil nama pengguna
-      String initial = name.toUpperCase().substring(0, 1);
       return SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
@@ -110,7 +109,7 @@ class ProfileBody extends StatelessWidget {
                     Container(
                       child: Center(
                           child: Text(
-                              userProvider.user?.name.substring(0, 1) ?? "",
+                              userProvider.user?.name ?? "",
                               style: normalText.copyWith(
                                 color: Colors.white,
                                 fontSize: 30,
@@ -129,7 +128,7 @@ class ProfileBody extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(initial + name.substring(1),
+                        Text(userProvider.user?.name ?? "Sobat",
                             textAlign: TextAlign.center,
                             style: headerTextStyle.copyWith(
                                 fontSize: 21, fontWeight: FontWeight.w600)),
@@ -143,7 +142,7 @@ class ProfileBody extends StatelessWidget {
                               color: Colors.yellow[700],
                             ),
                             Text(
-                              userProvider.user?.point.toString() ?? "0",
+                              userProvider.user?.coin.toString() ?? "0",
                               style: headerTextStyle.copyWith(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
@@ -157,13 +156,13 @@ class ProfileBody extends StatelessWidget {
                               width: 5,
                             ),
                             Text(
-                              userProvider.user?.isPremium == 1
+                              userProvider.user?.isVip == 1
                                   ? "premium"
                                   : "Regular",
                               style: headerTextStyle.copyWith(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
-                                  color: userProvider.user?.isPremium == 1
+                                  color: userProvider.user?.isVip == 1
                                       ? Colors.yellow[700]
                                       : Colors.grey[600]),
                             ),

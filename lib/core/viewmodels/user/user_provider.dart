@@ -41,8 +41,11 @@ class UserProvider extends ChangeNotifier {
   NutrionModel? get myNutrition => _myNutrition;
 
   // Nutrition data
-  List<MyMissionModel>? _myMission;
-  List<MyMissionModel>? get myMission => _myMission;
+  List<MyDayModel>? _myMission;
+  List<MyDayModel>? get myMission => _myMission;
+
+  MyDayModel? _currentDay;
+  MyDayModel? get currentDay => _currentDay;
 
   // User drink data
   List<UserDrinkModel>? _userDrink;
@@ -78,7 +81,6 @@ class UserProvider extends ChangeNotifier {
   HealthDataModel? get healthData => _healthData;
   // Daftar function
   Future<bool> daftar(String name, String email, String password) async {
-    print('$name, $email, $password');
     setOnSearch(true);
     try {
       final result = await userService.daftar(name, email, password);
@@ -101,6 +103,7 @@ class UserProvider extends ChangeNotifier {
     setOnSearch(true);
     try {
       final result = await userService.login(email, password);
+      setOnSearch(false);
       if (result.data.id != null) {
         _user = result.data;
         return true;
@@ -115,11 +118,13 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<bool> getUserData() async {
-    setOnSearch(true);
+    // setOnSearch(true);
     try {
       final result = await userService.getUserData();
       if (result.data.id != null) {
         _user = result.data;
+        print('JSON_USER : ${_user!.toJson().toString()}');
+        // setOnSearch(false);
         notifyListeners();
 
         return true;
@@ -189,13 +194,16 @@ class UserProvider extends ChangeNotifier {
     setOnSearch(true);
 
     final selectedDate = date ?? DateTime.now();
-    final formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
 
     try {
-      final result = await userService.getUserMission(date: date);
+      final result = await userService.getUserMission(date: selectedDate);
+      print("MISSION RESULT: ${result.data}");
 
       if (result.data!.isNotEmpty) {
         _myMission = result.data;
+
+        _currentDay =
+            _myMission!.firstWhere((element) => element.isToday ?? false);
       } else {
         _myMission = [];
       }
@@ -673,6 +681,7 @@ class UserProvider extends ChangeNotifier {
   // clear my mission
   void clearMyMission() {
     _myMission = null;
+    _currentDay = null;
     notifyListeners();
   }
 

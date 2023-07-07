@@ -58,18 +58,20 @@ class SurveyResultScreen extends StatelessWidget {
                       SizedBox(
                         width: defMargin,
                       ),
-                      Container(
-                        padding: EdgeInsets.all(2.h),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: neutral60),
-                            borderRadius: BorderRadius.circular(1.h)),
-                        child: AnimatedTextKit(
-                            isRepeatingAnimation: false,
-                            pause: Duration(milliseconds: 3000),
-                            animatedTexts: [
-                              TypewriterAnimatedText('${result!.warning}',
-                                  textStyle: GoogleFonts.poppins())
-                            ]),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(2.h),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: neutral60),
+                              borderRadius: BorderRadius.circular(1.h)),
+                          child: AnimatedTextKit(
+                              isRepeatingAnimation: false,
+                              pause: Duration(milliseconds: 3000),
+                              animatedTexts: [
+                                TypewriterAnimatedText('${result!.warning}',
+                                    textStyle: GoogleFonts.poppins())
+                              ]),
+                        ),
                       ),
                     ],
                   ),
@@ -222,7 +224,7 @@ class SurveyResultScreen extends StatelessWidget {
               child: RoundedButton(
                 width: double.infinity,
                 title: "Lanjut",
-                style: GoogleFonts.poppins(color: Colors.white),
+                style: GoogleFonts.poppins(color: blackColor),
                 background: primaryColor,
                 onClick: () {
                   Navigator.pushReplacementNamed(context, '/home');

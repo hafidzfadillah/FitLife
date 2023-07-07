@@ -9,7 +9,9 @@ class HistoryCard extends StatelessWidget {
     required this.date,
     required this.unit,
     required this.withTarget,
+    this.backgroundColor = const Color(0xffF6F8FA) ,
     this.target = 0,
+    this.urlIcon  = "assets/images/drink-water.png", 
   }) : super(key: key);
 
   final int value;
@@ -18,6 +20,8 @@ class HistoryCard extends StatelessWidget {
   final bool withTarget;
   final String unit;
   final int target;
+  final Color? backgroundColor;
+  final String? urlIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class HistoryCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
-          color: const Color(0xffF6F8FA),
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -53,16 +57,18 @@ class HistoryCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 5),
+                Text(
+                  withTarget ? "$value dari $target $unit" : "$value + $unit",
+                  style: const TextStyle(
+                    color: Color(0xff333333),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                )
               ],
             )),
-            Text(
-              withTarget ? "$value dari $target $unit" : "$value + $unit" ,
-              style: const TextStyle(
-                color: Color(0xff333333),
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            )
+            Image.asset( urlIcon ?? '', width: 30, height: 40, )
+            
           ],
         ),
       ),

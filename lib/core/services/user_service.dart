@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fitlife/core/data/base_api.dart';
@@ -56,6 +57,8 @@ class UserService {
     APIResponse response = await api.post(api.endpoint.login, data: data);
 
     final userData = response.data;
+    print(data);
+    print('User Data: $userData');
 
     // Save user data to shared preference.
     await saveUserData(userData!);
@@ -71,6 +74,8 @@ class UserService {
     APIResponse response =
         await api.post(api.endpoint.getUser, useToken: true, token: token);
     final userData = response.data;
+
+    print('RSP USER ${userData}');
 
     return ApiResult<UserModel>.fromJson(
         userData, (data) => UserModel.fromJson(data), "data");
@@ -109,19 +114,24 @@ class UserService {
         (data) => NutrionModel.fromJson(data), "my_nutrion");
   }
 
-  Future<ApiResultList<MyMissionModel>> getUserMission({DateTime? date}) async {
+  Future<ApiResultList<MyDayModel>> getUserMission({DateTime? date}) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('access_token');
+    await initializeDateFormatting();
 
     String dateStr = DateFormat('yyyy-MM-dd').format(date ?? DateTime.now());
 
     APIResponse response = await api.get(api.endpoint.getDailyData,
         useToken: true, token: token, data: {"date": dateStr});
 
-    return ApiResultList<MyMissionModel>.fromJson(
-        response.data?['data'],
-        (data) => data.map((e) => MyMissionModel.fromJson(e)).toList(),
-        "my_missions");
+    // print('RSP : $response');
+    // print('RSP Mission : ${response.data}');
+    // print('RSP Mission Data : ${response.data?['data']}');
+
+    return ApiResultList<MyDayModel>.fromJson(
+        response.data,
+        (data) => data.map((e) => MyDayModel.fromJson(e)).toList(),
+        "data");
   }
 
   Future<ApiResultList<UserDrinkModel>?> storeDrink() async {

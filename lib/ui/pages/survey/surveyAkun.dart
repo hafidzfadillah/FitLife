@@ -79,7 +79,7 @@ class _SurveyAkunState extends State<SurveyAkun> {
               CustomFormField(
                   hintText: 'Password',
                   state: password!,
-                  labelText: 'Masukkan password akun kamu',
+                  labelText: 'Buat password akun kamu',
                   isSecure: true,
                   validator: passwordValidator),
               SizedBox(

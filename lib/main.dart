@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:provider/provider.dart';
 import 'package:fitlife/GlobalProviders.dart';
 import 'package:fitlife/core/viewmodels/categories/categories_provider.dart';
@@ -24,6 +26,10 @@ List<CameraDescription>? cameras;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Atur status bar menjadi transparan
+  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+  //     overlays: [SystemUiOverlay.bottom]);
+
   Intl.defaultLocale = 'id'; // or any other locale you want to use
   var providers = await GlobalProviders.register();
   await setupLocator();
@@ -57,13 +63,6 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ...widget.providers,
-        ChangeNotifierProvider(create: (create) => CategoryProvider()),
-        ChangeNotifierProvider(create: (create) => UserProvider()),
-        ChangeNotifierProvider(create: (create) => SurveyProvider()),
-        ChangeNotifierProvider(create: (create) => ClassifyProvider()),
-        ChangeNotifierProvider(create: (create) => FoodProvider()),
-        ChangeNotifierProvider(create: (create) => ProductProvider()),
-        ChangeNotifierProvider(create: (create) => ProgramProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
