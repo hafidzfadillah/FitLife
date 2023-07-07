@@ -65,6 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: CustomBackButton(
+              iconColor:  Color(0xff707070),
               onClick: () {
                 Navigator.pop(context);
               },
@@ -160,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     style: GoogleFonts.poppins(
                                         color: primaryDarkColor,
                                         fontSize: 14,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.w600),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         EasyLoading.show(

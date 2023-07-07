@@ -1,3 +1,4 @@
+import 'package:fitlife/core/viewmodels/user/user_provider.dart';
 import 'package:fitlife/ui/home/theme.dart';
 import 'package:fitlife/ui/widgets/button.dart';
 import 'package:fitlife/ui/widgets/input_costume.dart';
@@ -15,11 +16,12 @@ class TopUpBambooScreen extends StatefulWidget {
 class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
   int selectedValue = 0;
 
+  final UserProvider _userProvider = UserProvider();
 
   TextEditingController bamboo = TextEditingController(text: "");
   TextEditingController coin = TextEditingController(text: "");
 
-    bool showWarning = false;
+  bool showWarning = false;
 
   @override
   void initState() {
@@ -45,12 +47,9 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
-  print(selectedValue);
+    print(selectedValue);
     return Scaffold(
       backgroundColor: lightModeBgColor,
       body: SafeArea(
@@ -64,7 +63,6 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 children: [
-                  
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -103,7 +101,7 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
                     physics: NeverScrollableScrollPhysics(),
                     children: _buildBambooNominalWidgets(),
                   ),
-                     Text(
+                  Text(
                     "Transaksi",
                     style: GoogleFonts.poppins(
                       color: blackColor,
@@ -112,7 +110,7 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
                     ),
                   ),
                   SizedBox(height: 16),
-                   Visibility(
+                  Visibility(
                     visible: showWarning,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -122,7 +120,7 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
                       ),
                     ),
                   ),
-                   CustomFormField(
+                  CustomFormField(
                     hintText: 'Masukan Jumlah Bamboo',
                     state: bamboo,
                     prefixIcon: Image.asset(
@@ -132,34 +130,30 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
                     ),
                     labelText: 'Jumlah Bamboo',
                   ),
-                                    SizedBox(height: 16),
-
+                  SizedBox(height: 16),
                   CustomFormField(
                     hintText: 'Jumlah Koin dibayar',
                     isEnable: false,
                     state: coin,
-                      prefixIcon: Image.asset(
+                    prefixIcon: Image.asset(
                       "assets/images/coin.png",
                       width: 50,
                       height: 50,
                     ),
                     labelText: 'Jumlah Koin dibayar',
                   ),
-
-                  
-                   
                   SizedBox(height: 16),
-
-                      RoundedButton(
+                  RoundedButton(
                       background: primaryColor,
                       width: double.infinity,
                       title: 'Tukar',
                       style: GoogleFonts.poppins(color: Colors.black),
                       onClick: () {
+                        // call provider and call method convert bamboo to coin
+                        // and pass the value of bamboo
+                        _userProvider.convertBamboo(int.parse(coin.text));
                         Navigator.pushNamed(context, '/topup-bamboo-success');
                       }),
-
-                      
                 ],
               ),
             ),

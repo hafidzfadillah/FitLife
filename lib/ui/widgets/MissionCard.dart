@@ -20,6 +20,7 @@ class MissionCard extends StatelessWidget {
     required this.icon,
     this.backgroundColor,
     required this.screen,
+    required this.route,
   }) : super(key: key);
 
   final double? progress;
@@ -32,6 +33,7 @@ class MissionCard extends StatelessWidget {
   final String icon;
   final String? backgroundColor;
   final String screen;
+  final String route;
 
   @override
   Widget build(BuildContext context) {

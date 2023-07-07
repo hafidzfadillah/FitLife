@@ -133,7 +133,6 @@ class VitaPulseScreenBody extends StatelessWidget {
 
         return SafeArea(
             child: ListView(
-              
           children: [
             Container(
                 width: double.infinity,
@@ -147,9 +146,9 @@ class VitaPulseScreenBody extends StatelessWidget {
                   child: _UserHealthSummary(),
                 )),
             const SizedBox(height: 24),
-             Padding(
-               padding: const EdgeInsets.symmetric(horizontal: 16.0 ),
-               child: Row(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
                 children: [
                   Image.asset(
                     'assets/images/pandai_head.png',
@@ -171,11 +170,9 @@ class VitaPulseScreenBody extends StatelessWidget {
                                 fontWeight: FontWeight.w600))
                       ]),
                 ],
-                         ),
-             ),
-            
+              ),
+            ),
             Padding(
-
               padding: const EdgeInsets.all(16.0),
               child: AnimatedTextKit(
                 isRepeatingAnimation: false,
@@ -190,10 +187,6 @@ class VitaPulseScreenBody extends StatelessWidget {
                 ],
               ),
             ),
-                 
-
-      
-                  
             const _UserHistoryHealth(),
           ],
         ));
@@ -210,49 +203,48 @@ class _UserHealthSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
-//       if (userProvider.userBpm == null && !userProvider.onSearch) {
-//         userProvider.getUserHistoryHealth();
-//         return const Center(child: CircularProgressIndicator());
-//       }
+      if (userProvider.userBpm == null && !userProvider.onSearch) {
+        userProvider.getUserHistoryHealth();
+        return const Center(child: CircularProgressIndicator());
+      }
 
-//       if (userProvider.userBpm == null && userProvider.onSearch) {
-//         return const Center(child: CircularProgressIndicator());
-//       }
+      if (userProvider.userBpm == null && userProvider.onSearch) {
+        return const Center(child: CircularProgressIndicator());
+      }
 
-//       final List<int> bpmValues =
-//           userProvider.userBpm?.map((e) => e.value)?.toList() ?? [];
+      final List<int> bpmValues =
+          userProvider.userBpm?.map((e) => e.value)?.toList() ?? [];
 
-//       if (bpmValues.isNotEmpty) {
-//         final int averageBpm =
-//             (bpmValues.reduce((a, b) => a + b) / bpmValues.length).round();
-// // Get heart rate data points for chart
-//         final List<FlSpot> heartRatePoints = [];
-//         for (final bpm in userProvider.userBpm ?? []) {
-//           final DateTime date = bpm.createdAt;
-//           final double x = date.millisecondsSinceEpoch.toDouble();
-//           final double y = bpm.value.toDouble();
-//           final FlSpot spot = FlSpot(x, y);
-//           heartRatePoints.add(spot);
-//         }
-    
-      //   return Column(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       Center(
-      //         child: Text(
-      //           '1 bpm',
-      //           style: normalText.copyWith(
-      //               fontSize: 18,
-      //               color: const Color(0xff333333),
-      //               fontWeight: FontWeight.w600),
-      //         ),
-      //       ),
-      //       const SizedBox(height: 80),
-      //       // Container(child: LineChartHeartRate(heartRatePoints)),
-      //     ],
-      //   );
-    
-      // } else {
+      if (bpmValues.isNotEmpty) {
+        final int averageBpm =
+            (bpmValues.reduce((a, b) => a + b) / bpmValues.length).round();
+// Get heart rate data points for chart
+        final List<FlSpot> heartRatePoints = [];
+        for (final bpm in userProvider.userBpm ?? []) {
+          final DateTime date = bpm.createdAt;
+          final double x = date.millisecondsSinceEpoch.toDouble();
+          final double y = bpm.value.toDouble();
+          final FlSpot spot = FlSpot(x, y);
+          heartRatePoints.add(spot);
+        }
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Text(
+                '1 bpm',
+                style: normalText.copyWith(
+                    fontSize: 18,
+                    color: const Color(0xff333333),
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            const SizedBox(height: 80),
+            // Container(child: LineChartHeartRate(heartRatePoints)),
+          ],
+        );
+      } else {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -276,7 +268,7 @@ class _UserHealthSummary extends StatelessWidget {
           ],
         );
       }
-    );
+    });
   }
 }
 
@@ -288,14 +280,14 @@ class _UserHistoryHealth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
-      // if (userProvider.userBpm == null && !userProvider.onSearch) {
-      //   userProvider.getUserHistoryHealth();
-      //   return const Center(child: CircularProgressIndicator());
-      // }
+      if (userProvider.userBpm == null && !userProvider.onSearch) {
+        userProvider.getUserHistoryHealth();
+        return const Center(child: CircularProgressIndicator());
+      }
 
-      // if (userProvider.userBpm == null && userProvider.onSearch) {
-      //   return const Center(child: CircularProgressIndicator());
-      // }
+      if (userProvider.userBpm == null && userProvider.onSearch) {
+        return const Center(child: CircularProgressIndicator());
+      }
 
       return SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -314,29 +306,21 @@ class _UserHistoryHealth extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            HistoryCard(
+            
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: userProvider.userBpm!.length,
+              itemBuilder: (context, index) {
+                return HistoryCard(
                   unit: "bpm",
                   withTarget: false,
                   title: "Catatan detak jantung",
-                  value:  0,
-                  backgroundColor:  Color(0xffFFF7F7),
-                  date: DateTime.now().toString(),
-                  urlIcon: "assets/images/heart_icon.png",
-                )
-            // ListView.builder(
-            //   shrinkWrap: true,
-            //   physics: const NeverScrollableScrollPhysics(),
-            //   itemCount: userProvider.userBpm!.length,
-            //   itemBuilder: (context, index) {
-            //     return HistoryCard(
-            //       unit: "bpm",
-            //       withTarget: false,
-            //       title: "Catatan detak jantung",
-            //       value: userProvider.userBpm?[index].value ?? 0,
-            //       date: userProvider.userBpm?[index].createdAt.toString() ?? "",
-            //     );
-            //   },
-            // )
+                  value: userProvider.userBpm?[index].value ?? 0,
+                  date: userProvider.userBpm?[index].createdAt.toString() ?? "",
+                );
+              },
+            )
           ],
         ),
       );

@@ -21,6 +21,7 @@ import 'package:intl/intl.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:camera/camera.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 List<CameraDescription>? cameras;
 

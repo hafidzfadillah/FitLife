@@ -103,7 +103,8 @@ class UserProvider extends ChangeNotifier {
     setOnSearch(true);
     try {
       final result = await userService.login(email, password);
-      setOnSearch(false);
+
+      print(result.data);
       if (result.data.id != null) {
         _user = result.data;
         return true;
@@ -198,6 +199,8 @@ class UserProvider extends ChangeNotifier {
     try {
       final result = await userService.getUserMission(date: selectedDate);
       print("MISSION RESULT: ${result.data}");
+
+      print(result);
 
       if (result.data!.isNotEmpty) {
         _myMission = result.data;
@@ -660,6 +663,20 @@ class UserProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> convertBamboo(int coin) async {
+
+    try {
+      await userService.convertBamboo(coin);
+
+      notifyListeners();
+    } catch (e, stacktrace) {
+      debugPrint("Error: ${e.toString()}");
+      debugPrint("Stacktrace: ${stacktrace.toString()}");
+    }
+    notifyListeners();
+  }
+
 
   // Set event login
   void setOnSearch(bool value) {

@@ -105,6 +105,7 @@ class MyMissionModel extends Serializable {
         "icon": icon,
         "color_theme": colorTheme.toString(),
         "coin": coin,
+        "coin": coin,
         "target": target,
         "current": current,
         "type_target": typeTarget,
