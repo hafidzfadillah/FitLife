@@ -124,7 +124,7 @@ class UserService {
     print(dateStr);
 
     APIResponse response = await api.get(api.endpoint.getDailyData,
-        useToken: true, token: token, data: {"date": dateStr});
+        useToken: true, token: token);
 
     // print('RSP : $response');
     // print('RSP Mission : ${response.data}');

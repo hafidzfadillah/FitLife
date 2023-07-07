@@ -136,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 lineHeight: 1.h,
                                 padding: EdgeInsets.all(0),
                                 barRadius: Radius.circular(1.h),
-                                percent: (userProvider
+                                percent: userProvider.currentDay == null ? 0 : (userProvider
                                         .currentDay!.missionSuccessCount! /
                                     userProvider.currentDay!.missions!.length),
                                 backgroundColor: neutral30,

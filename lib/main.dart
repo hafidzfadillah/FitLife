@@ -74,6 +74,9 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.green,
         ),
         onGenerateRoute: RouteGenerator.generateRoute,
+        onUnknownRoute: ((settings) {
+          Navigator.pushNamed(context, 'error');
+        }),
         builder: EasyLoading.init(),
       ),
     );

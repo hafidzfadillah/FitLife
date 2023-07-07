@@ -40,7 +40,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         setState(() {
           isAuth = true;
         });
-        Navigator.pushNamedAndRemoveUntil(context, '/tempory', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
 
       }
     }

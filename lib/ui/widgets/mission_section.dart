@@ -33,7 +33,6 @@ class Mission extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             ListView.separated(
               shrinkWrap: true,
               itemCount: myMission!.length,
@@ -60,6 +59,7 @@ class Mission extends StatelessWidget {
                           icon: myMission![index].icon,
                           backgroundColor: myMission![index].colorTheme,
                           screen: myMission![index].name,
+                          route: myMission![index].route,
                         ),
                         SizedBox(
                           width: 3.h,
@@ -75,6 +75,7 @@ class Mission extends StatelessWidget {
                           icon: x.icon,
                           backgroundColor: x.colorTheme,
                           screen: x.name,
+                          route: x.route,
                         )
                       ],
                     );
@@ -94,6 +95,7 @@ class Mission extends StatelessWidget {
                         icon: myMission![index].icon,
                         backgroundColor: myMission![index].colorTheme,
                         screen: myMission![index].route,
+                        route: myMission![index].route,
                       )
                     : Container();
               },
