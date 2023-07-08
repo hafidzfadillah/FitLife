@@ -123,17 +123,15 @@ class UserService {
 
     print(dateStr);
 
-    APIResponse response = await api.get(api.endpoint.getDailyData,
-        useToken: true, token: token);
+    APIResponse response =
+        await api.get(api.endpoint.getDailyData, useToken: true, token: token);
 
     // print('RSP : $response');
     // print('RSP Mission : ${response.data}');
     // print('RSP Mission Data : ${response.data?['data']}');
 
-    return ApiResultList<MyDayModel>.fromJson(
-        response.data,
-        (data) => data.map((e) => MyDayModel.fromJson(e)).toList(),
-        "data");
+    return ApiResultList<MyDayModel>.fromJson(response.data,
+        (data) => data.map((e) => MyDayModel.fromJson(e)).toList(), "data");
   }
 
   Future<ApiResultList<UserDrinkModel>?> storeDrink() async {
@@ -417,16 +415,18 @@ class UserService {
         response.data, (data) => TransactionModel.fromJson(data), "data");
   }
 
-
-  Future<void>  convertBamboo(int coin ) async {
-      final prefs = await SharedPreferences.getInstance();
+  Future<String> convertBamboo(int coin) async {
+    final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('access_token');
 
     APIResponse response = await api.post(api.endpoint.convertBamboo,
         useToken: true, token: token, data: {"coin": coin});
 
-
-
-
+    // if status code 402
+    if (response.statusCode == 402) {
+      return  response.data?['message'];
+    } else {
+      return "success";
+    }
   }
 }

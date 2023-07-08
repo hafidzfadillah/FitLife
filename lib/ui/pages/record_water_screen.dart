@@ -33,10 +33,10 @@ class _RecordWaterScreenState extends State<RecordWaterScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: CustomBackButton(
-          iconColor : Color(0xff6FB6E1),
-          onClick: () {
-          Navigator.pop(context);
-        }),
+            iconColor: Color(0xff6FB6E1),
+            onClick: () {
+              Navigator.pop(context);
+            }),
       ),
       body: ChangeNotifierProvider(
         create: (context) => UserProvider(),
@@ -87,52 +87,47 @@ class RecordWaterScreenBody extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 33),
                 children: [
                   const _UserDrinkProgress(),
-                    const SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-
-                  Row(children: [
-                    Image.asset(
-                      'assets/images/pandai_head.png',
-                      width: 30,
-                      height: 30,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    AnimatedTextKit(
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/pandai_head.png',
+                        width: 30,
+                        height: 30,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      AnimatedTextKit(
                           isRepeatingAnimation: false,
                           pause: Duration(seconds: 2000),
                           animatedTexts: [
-                            TypewriterAnimatedText(
-                                'Tahukah kamu  ? ',
+                            TypewriterAnimatedText('Tahukah kamu  ? ',
                                 textAlign: TextAlign.center,
                                 textStyle: GoogleFonts.poppins(
                                     fontSize: 16,
                                     color: const Color(0xff333333),
-                                    fontWeight: FontWeight.w600
-                                ))
+                                    fontWeight: FontWeight.w600))
                           ]),
-                  ],),
-                 
-                    
-
+                    ],
+                  ),
                   const SizedBox(
                     height: 16,
                   ),
-                        AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          pause: Duration(seconds: 2000),
-                          animatedTexts: [
-                            TypewriterAnimatedText(
-                               "Dengan meminum gelas 8 hari sekali Dapat memelihara fungsi ginjal. Menghindari dehidrasi. Mengurangi risiko kanker kandung kemih.", textStyle: normalText.copyWith(
-                        fontSize: 14,
-                        color: const Color(0xff484848),
-                        fontWeight: FontWeight.w400)
-                          ),
-                  ],),
-                  
-                
+                  AnimatedTextKit(
+                    isRepeatingAnimation: false,
+                    pause: Duration(seconds: 2000),
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                          "Dengan meminum gelas 8 hari sekali Dapat memelihara fungsi ginjal. Menghindari dehidrasi. Mengurangi risiko kanker kandung kemih.",
+                          textStyle: normalText.copyWith(
+                              fontSize: 14,
+                              color: const Color(0xff484848),
+                              fontWeight: FontWeight.w400)),
+                    ],
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -177,11 +172,17 @@ class _UserDrinkProgress extends StatelessWidget {
 
       final mission = userProvider.currentDay!.missions!
           .firstWhere((m) => m.name == "Catat Aktivitas Minum");
+
+      print(mission);
+
       final int currentDrink = mission.current;
 
       return Center(
         child: DrinkProgressBar(
-            currentDrink: currentDrink, goalDrink: 8, width: 200 , color: Color(0xff6FB6E1) ),
+            currentDrink: 1,
+            goalDrink: 8,
+            width: 200,
+            color: Color(0xff6FB6E1)),
       );
     });
   }
@@ -202,8 +203,6 @@ class _UserHistoryDrink extends StatelessWidget {
         return const Center(child: CircularProgressIndicator());
       }
 
-     
-       
       return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -211,7 +210,7 @@ class _UserHistoryDrink extends StatelessWidget {
         itemBuilder: (context, index) {
           return HistoryCard(
             title: 'Catat Asup Minum',
-                    date: DateFormat('dd MMMM yyyy, HH:mm:ss')
+            date: DateFormat('dd MMMM yyyy, HH:mm:ss')
                 .format(userProvider.userDrink![index].createdAt),
             value: userProvider.userDrink![index].value,
             urlIcon: "assets/images/drink-water.png",
@@ -247,7 +246,7 @@ class _SwipeToDrinkState extends State<SwipeToDrink> {
           Icons.arrow_forward_ios_rounded,
           color: Colors.grey,
         ),
-        activeColor:  Color(0xff6FB6E1),
+        activeColor: Color(0xff6FB6E1),
         isFinished: isFinished,
         onWaitingProcess: () {
           widget.userProvider.storeDrink();

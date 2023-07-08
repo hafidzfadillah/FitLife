@@ -4,6 +4,7 @@ import 'package:fitlife/ui/widgets/button.dart';
 import 'package:fitlife/ui/widgets/input_costume.dart';
 import 'package:fitlife/ui/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TopUpBambooScreen extends StatefulWidget {
@@ -55,8 +56,8 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            MainTopBar(
-              title: 'Toko Pandan',
+            MainTopBar2(
+              costumeTitle: 'To Up Bamboo',
             ),
             Expanded(
               child: ListView(
@@ -101,6 +102,7 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
                     physics: NeverScrollableScrollPhysics(),
                     children: _buildBambooNominalWidgets(),
                   ),
+                  SizedBox(height: 20),
                   Text(
                     "Transaksi",
                     style: GoogleFonts.poppins(
@@ -123,6 +125,7 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
                   CustomFormField(
                     hintText: 'Masukan Jumlah Bamboo',
                     state: bamboo,
+                    inputType:  TextInputType.number,
                     prefixIcon: Image.asset(
                       "assets/images/bamboo.png",
                       width: 50,
@@ -134,6 +137,8 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
                   CustomFormField(
                     hintText: 'Jumlah Koin dibayar',
                     isEnable: false,
+                                        inputType: TextInputType.number,
+
                     state: coin,
                     prefixIcon: Image.asset(
                       "assets/images/coin.png",
@@ -149,10 +154,38 @@ class _TopUpBambooScreenState extends State<TopUpBambooScreen> {
                       title: 'Tukar',
                       style: GoogleFonts.poppins(color: Colors.black),
                       onClick: () {
+                        if (showWarning == true) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Minimal pembelian 10 Bamboo'),
+                          ));
+                        }else{
+                          Future<bool> isSuccess =
+                              _userProvider.convertBamboo(int.parse(coin.text));
+
+                          isSuccess.then((value) {
+                            if (value) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Berhasil ditukar'),
+                                ),
+                              );
+                              Navigator.pushNamed(context, '/topup-bamboo-success');
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  
+                                  content: Text('Ups  Coin tidak cukup '),
+                                ),
+                              );
+                            }
+
+                            EasyLoading.dismiss();
+                          });
+                        }
+
                         // call provider and call method convert bamboo to coin
                         // and pass the value of bamboo
-                        _userProvider.convertBamboo(int.parse(coin.text));
-                        Navigator.pushNamed(context, '/topup-bamboo-success');
+                      
                       }),
                 ],
               ),

@@ -103,7 +103,10 @@ class _MainTopBarState extends State<MainTopBar> {
 }
 
 class MainTopBar2 extends StatefulWidget {
-  const MainTopBar2({Key? key}) : super(key: key);
+
+  final String? costumeTitle;
+
+  const MainTopBar2({Key? key , this.costumeTitle}) : super(key: key);
 
   @override
   State<MainTopBar2> createState() => _MainTopBar2State();
@@ -120,7 +123,7 @@ class _MainTopBar2State extends State<MainTopBar2> {
         children: [
           Expanded(
             child: Text(
-              'Hi, ${userProvider.user?.name ?? 'Sobat'}',
+              widget.costumeTitle  != null ?  widget.costumeTitle.toString() :  'Hi, ${userProvider.user?.name ?? 'Sobat'}' ,
               style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600, fontSize: 16),
             ),

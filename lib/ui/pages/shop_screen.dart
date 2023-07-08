@@ -1,4 +1,5 @@
 import 'package:fitlife/ui/home/theme.dart';
+import 'package:fitlife/ui/pages/topup_bamboo_screen.dart';
 import 'package:fitlife/ui/widgets/button.dart';
 import 'package:fitlife/ui/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +11,15 @@ class ShopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         backgroundColor: lightModeBgColor,
         body: SafeArea(
           child: Column(
             children: [
-              const MainTopBar(
-                title: 'Toko Pandan',
-              ),
+                              MainTopBar2(
+                costumeTitle: 'Toko Pandan',
+                              ),
+
               Expanded(
                   child: ListView(
                 padding:
@@ -123,7 +126,10 @@ class ShopScreen extends StatelessWidget {
                     title: ' Bamboo',
                     color: 0xffCEFCDC,
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/topup');
+                            Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                              builder: ((context) => TopUpBambooScreen())));
+                        
                     },
                     iconImage: 'assets/images/bamboo.png',
                     description:
