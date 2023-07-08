@@ -134,7 +134,7 @@ class _FoodListScreenState extends State<FoodListScreen>
                   Navigator.popAndPushNamed(context, '/home');
                 });
               },
-              backgroundColor: Colors.green,
+              backgroundColor: Color(0xffFFB029),
               child: const Icon(Icons.check),
             )
           : const FloatingActionButton(
@@ -190,14 +190,18 @@ class _FoodListScreenState extends State<FoodListScreen>
               onPressed: () {
                 choosePicture();
               },
-              icon: const Icon(Icons.camera_alt, color: Color(0xff333333)),
+              icon: Image.asset(
+                'assets/images/camera.png',
+                width: 24,
+                height: 24,
+            ),
             ),
         ],
         leading: CustomBackButton(
-          onClick: () {
-            Navigator.pop(context);
-          },
-        ),
+            iconColor: const Color(0xffFFB029),
+            onClick: () {
+              Navigator.pop(context);
+            }),
       ),
       body: ChangeNotifierProvider(
         create: (context) => FoodProvider(),
@@ -234,7 +238,7 @@ class _FoodListScreenState extends State<FoodListScreen>
                               entry.value,
                               style: normalText.copyWith(
                                 color: _selectedMealTypeIndex == entry.key
-                                    ? Colors.green
+                                    ? Color(0xffFFB029)
                                     : const Color(0xff333333),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -243,7 +247,7 @@ class _FoodListScreenState extends State<FoodListScreen>
                             _selectedMealTypeIndex == entry.key
                                 ? const Icon(
                                     Icons.check,
-                                    color: Colors.green,
+                                    color: Color(0xffFFB029),
                                   )
                                 : Container(),
                           ],
@@ -320,7 +324,7 @@ class _FoodListBodyState extends State<FoodListBody> {
                 labelStyle: TextStyle(fontSize: 14, color: Color(0xff333333)),
                 labelColor: Color(0xff333333),
                 indicatorColor:
-                    Colors.green, // Warna indicator untuk tab yang aktif
+                    Color(0xffFFB029), // Warna indicator untuk tab yang aktif
                 tabs: [
                   Tab(text: 'Terakhir dicari'),
                   Tab(text: 'Makanan Populer'),

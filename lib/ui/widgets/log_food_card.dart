@@ -85,7 +85,7 @@ class LogFoodCard extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      const Icon(Icons.add, size: 24, color: primaryColor)
+                      const Icon(Icons.add, size: 24, color: Color(0xffFFB029))
                     ],
                   )
                 ],

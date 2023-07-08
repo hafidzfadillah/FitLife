@@ -107,7 +107,7 @@ class UserService {
 
     String dateStr = DateFormat('yyyy-MM-dd').format(date ?? DateTime.now());
 
-    APIResponse response = await api.get(api.endpoint.getDailyData,
+    APIResponse response = await api.get(api.endpoint.getDailyDataDetail,
         useToken: true, token: token, data: {"date": dateStr});
 
     return ApiResult<NutrionModel>.fromJson(response.data?['data'],
