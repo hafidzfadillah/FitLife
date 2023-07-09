@@ -37,10 +37,11 @@ class MissionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Progres $title $progress"  );
     return InkWell(
       onTap: () {
         Navigator.of(context, rootNavigator: true)
-            .pushNamed(screen.toLowerCase());
+            .pushNamed(route.toLowerCase());
       },
       child: Container(
         child: Column(
@@ -55,8 +56,11 @@ class MissionCard extends StatelessWidget {
                       angle: 3 * pi / 4,
                       child: CircularProgressIndicator(
                         backgroundColor: Colors.grey[300],
-                        valueColor: AlwaysStoppedAnimation(Colors.amber),
-                        value: progress,
+                        valueColor: AlwaysStoppedAnimation(
+                            Color(int.parse(missionColor ?? '7FB06B'))
+
+                        ),
+                        value:  progress != null ? progress! / 100 : null,
                         strokeWidth: 60,
                       ),
                     ),

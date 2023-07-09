@@ -292,12 +292,13 @@ class _UserNutrionWidget extends StatelessWidget {
           SizedBox(
             height:  16,
           ),
-          NutritionalBar(carbsPercent: 0.15, fatPercent: 0.1, proteinPercent: 0.25),
+          NutritionalBar(carbsPercent: userProvider.myNutrition?.carbPercentage.toDouble() ?? 0, fatPercent:
+                  userProvider.myNutrition?.fatPercentage.toDouble() ?? 0, proteinPercent: userProvider.myNutrition?.proteinPercentage.toDouble() ?? 0),
           const SizedBox(
             height: 16,
           ),
 
-          NutritionInfoBox(carbs: 12, protein: 12, fat: 12)
+          NutritionInfoBox(carbs: userProvider.myNutrition?.carbohydrate ?? 0, protein: userProvider.myNutrition?.protein ?? 0, fat: userProvider.myNutrition?.fat ?? 0)
           // NutrientChart(
           //   carbsPercentage:
           //       (userProvider.myNutrition?.carbPercentage.toDouble() ?? 0) *

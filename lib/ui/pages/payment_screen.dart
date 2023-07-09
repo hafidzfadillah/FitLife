@@ -1,9 +1,14 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:fitlife/ui/widgets/CustomAppBar.dart';
+import 'package:fitlife/ui/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:fitlife/core/models/transaction/transaction_model.dart';
 import 'package:fitlife/ui/home/theme.dart';
 import 'package:fitlife/ui/pages/main_pages.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../core/viewmodels/user/user_provider.dart';
 
@@ -120,13 +125,18 @@ class _PaymentPageState extends State<PaymentPage> {
             },
             label: Text("Cek Status Pembayaran",
                 style: normalText.copyWith(
-                    color: Colors.white, fontWeight: FontWeight.w600)),
-            backgroundColor: primaryColor,
+                    color: Colors.black, fontWeight: FontWeight.w600)),
+            backgroundColor: Color(0xffFFE590),
           )),
-      appBar: AppBar(
-        title: const Text('Payment Details'),
-        backgroundColor: primaryColor,
+     appBar: CustomAppBar(
+        title: ' Pembayaran ',
+        backgroundColor: lightModeBgColor,
         elevation: 0,
+        leading: CustomBackButton(
+            iconColor: Color(0xffFFE590),
+            onClick: () {
+              Navigator.pop(context);
+            }),
       ),
       body: SafeArea(
         child: Container(
@@ -135,48 +145,90 @@ class _PaymentPageState extends State<PaymentPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Payment Information',
-                style: TextStyle(
+              Row(
+                children: [
+                Image.asset('assets/images/pandai_head.png', width: 35, height: 35,),
+                  const SizedBox(width: 8),
+                Container(
+                    width:   MediaQuery.of(context).size.width * 0.78 ,
+                    padding: EdgeInsets.all(2.h),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: neutral60),
+                        borderRadius: BorderRadius.circular(1.h)),
+                    child: AnimatedTextKit(
+                        isRepeatingAnimation: false,
+                        pause: Duration(seconds: 2000),
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                               'Berikut adalah detail pembayaran kamu , pastikan kamu melakukan pembayaran sebelum $formattedExpireTime ',
+                              textStyle: GoogleFonts.poppins())
+                        ]),
+                  ),
+                 
+                ],
+              ),
+              const SizedBox(height: 18),
+             
+              const SizedBox(height: 8),
+               Text(
+                'Detail Pembayaran ',
+                style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
               ),
-              const SizedBox(height: 18),
+              const SizedBox(height: 8),
               Row(
+                
+                mainAxisAlignment:  MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Payment Type: '),
-                  Text(widget.paymentType),
+                   Text('Metode Pembayaran: ' , style: textRegularStyle,
+                ),
+                
+            
+                  Text(widget.bank.toUpperCase() , style: GoogleFonts.poppins( 
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
+             
+
+                  ),
                 ],
               ),
               const SizedBox(height: 8),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Bank: '),
-                  Text(widget.bank),
+                  
+                  RichText(text: TextSpan(
+                    text: 'VA Number : ',
+                   style:  textRegularStyle,
+                    children: [
+                      TextSpan(
+                        text: widget.vaNumber,
+                        style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
+                      )
+                    ]
+                    )
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Clipboard.setData(ClipboardData(text: widget.vaNumber));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Copied to clipboard'),
+                        ),
+                      );
+                    },
+                    child: Icon(Icons.copy),
+                  ),
                 ],
               ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  const Text('VA Number: '),
-                  Text(widget.vaNumber),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        Clipboard.setData(ClipboardData(text: widget.vaNumber));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Copied to clipboard'),
-                          ),
-                        );
-                      },
-                      child: Icon(Icons.copy),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 18),
+              const SizedBox(height: 16),
+          
               const Text(
                 'Transaction Details',
                 style: TextStyle(
@@ -184,25 +236,37 @@ class _PaymentPageState extends State<PaymentPage> {
                   fontSize: 18,
                 ),
               ),
-              const SizedBox(height: 16),
+                  const SizedBox(height: 18),
+              Text(widget.transactionId,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  )),
+              const SizedBox(height: 8),
+            
+        
               Row(
+                mainAxisAlignment:  MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Transaction ID: '),
-                  Expanded(child: Text(widget.transactionId)),
+                   Text('Total Bayar: ' , style: textRegularStyle ),
+                  Text(formattedGrossAmount , style: GoogleFonts.poppins( 
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                  )
+                  ),
                 ],
               ),
               const SizedBox(height: 8),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Gross Amount: '),
-                  Text(formattedGrossAmount),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  const Text('Expiration Time: '),
-                  Text(formattedExpireTime),
+                   Text('Expiration Time: ' , style: textRegularStyle ),
+                  Text(formattedExpireTime, style: GoogleFonts.poppins( 
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                  )
+
+                  ),
                 ],
               ),
             ],

@@ -1,4 +1,5 @@
 import 'package:fitlife/ui/home/theme.dart';
+import 'package:fitlife/ui/pages/premium_screen.dart';
 import 'package:fitlife/ui/pages/topup_bamboo_screen.dart';
 import 'package:fitlife/ui/widgets/button.dart';
 import 'package:fitlife/ui/widgets/top_bar.dart';
@@ -118,7 +119,11 @@ class ShopScreen extends StatelessWidget {
                   ShopCardItem(
                     title: 'Vip Member',
                     color: 0xffFFE590,
-                    onPressed: () {},
+                    onPressed: () {
+                          Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                              builder: ((context) => PremiumScreen())));
+                    },
                     description: 'dengan Vip kamu dapat beragam fitur premium',
                   ),
                   const SizedBox(height: 15.0),

@@ -24,6 +24,9 @@ class Mission extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // loop my mission and print 
+
+
     return Column(
       children: [
         const SizedBox(height: 16),

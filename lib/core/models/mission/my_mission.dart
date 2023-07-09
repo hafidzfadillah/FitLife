@@ -3,7 +3,7 @@ import 'package:fitlife/core/models/api/api_result_model.dart';
 class MyDayModel extends Serializable {
    int? day;
    bool? isToday;
-   int? percentageSuccess;
+   num? percentageSuccess;
    int? missionSuccessCount;
    int? targetCalories;
    int? calorieLeft;
@@ -95,7 +95,7 @@ class MyMissionModel extends Serializable {
         typeTarget: json['type_target'] ?? "",
         status: json['status'] ?? "",
         date: json['date'] ?? "",
-        percentageSuccess: json['percentange_success'] ?? 0,
+        percentageSuccess: json['percentage_success'] ?? 0,
         route: json['route'],
       );
   @override
@@ -105,13 +105,12 @@ class MyMissionModel extends Serializable {
         "icon": icon,
         "color_theme": colorTheme.toString(),
         "coin": coin,
-        "coin": coin,
         "target": target,
         "current": current,
         "type_target": typeTarget,
         "status": status,
         "date": date,
-        "percentange_success": percentageSuccess,
+        "percentage_success": percentageSuccess,
         'route': route
       };
 }
