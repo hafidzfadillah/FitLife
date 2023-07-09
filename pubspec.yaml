@@ -73,6 +73,9 @@ dependencies:
   flutter_easyloading: ^3.0.5
   expandable_text: ^2.3.0
   flutter_swiper_view: ^1.1.8
+  google_maps_flutter: ^2.3.0
+  geolocator: ^9.0.2
+  location: ^4.4.0
 
 dev_dependencies:
   flutter_test:
