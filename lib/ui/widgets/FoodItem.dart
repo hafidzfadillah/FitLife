@@ -59,7 +59,7 @@ class _FoodItemState extends State<FoodItem> {
                           '${widget.size}  ${widget.unit} ',
                           style: normalText.copyWith(
                             fontSize: 13,
-                            color: primaryColor,
+                            color: const Color(0xffFFB029),
                           ),
                         ),
                         SizedBox(
@@ -79,6 +79,7 @@ class _FoodItemState extends State<FoodItem> {
                 // checkbox
                 Checkbox(
                     value: widget.isChecked,
+                    activeColor:  const Color(0xffFFB029),
                     onChanged: (bool? newValue) {
                       if (newValue != null) {
                         widget.onSelect(newValue);
