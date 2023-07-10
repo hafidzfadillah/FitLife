@@ -14,6 +14,7 @@ class RecordWeightScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: lightModeBgColor,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -24,14 +25,17 @@ class RecordWeightScreen extends StatelessWidget {
             Navigator.pop(context);
           }
         },
-        backgroundColor: primaryColor,
+        backgroundColor: Color(0xff8D5EBC),
+        
         child: const Icon(Icons.add, color: Colors.white),
       ),
       appBar: CustomAppBar(
         title: 'Record  Berat Badan',
         backgroundColor: lightModeBgColor,
         elevation: 0,
-        leading: CustomBackButton(onClick: () {
+        leading: CustomBackButton(
+          iconColor:  Color(0xff8D5EBC),
+          onClick: () {
           Navigator.pop(context);
         }),
       ),
@@ -149,8 +153,10 @@ class _UserWeightHistory extends StatelessWidget {
               itemCount: userProvider.userWeight!.length,
               itemBuilder: (context, index) {
                 return HistoryCard(
-                  unit: "bpm",
+                  unit: "kg",
                   withTarget: false,
+                  urlIcon:  "assets/images/icon_m5.png",
+                  backgroundColor:  Color(0xffFAF5FF),
                   title: "Catatan berat badan",
                   value: userProvider.userWeight?[index].value ?? 0,
                   date: userProvider.userWeight?[index].createdAt.toString() ??

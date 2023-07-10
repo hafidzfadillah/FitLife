@@ -25,6 +25,7 @@ class Api {
   String getUser = "$_baseServer/auth/me";
   // String getDailyData = "$_baseServer/getDailyData";
   String getDailyData = "$_baseServer/mymission";
+  String getDailyDataDetail = "$_baseServer/getDailyData";
   String storeDrink = "$_baseServer/drink/store";
   String historyDrink = "$_baseServer/drink/history";
   String historyFood = "$_baseServer/foods-track/history";

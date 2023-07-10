@@ -81,8 +81,9 @@ class _VideoTileState extends State<VideoTile> {
                   )
                 ],
               );
-          } else {
-            return Container(
+          }
+          
+          return Container(
               color: blackColor,
               child: Center(
                   child: LoadingAnimationWidget.flickr(
@@ -90,7 +91,6 @@ class _VideoTileState extends State<VideoTile> {
                       rightDotColor: primaryDarkColor,
                       size: 50)),
             );
-          }
         },
       ),
     );

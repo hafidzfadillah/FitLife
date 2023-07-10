@@ -39,7 +39,7 @@ class _MainPagesState extends State<MainPages> {
       controller: _controller,
       decoration: NavBarDecoration(
           adjustScreenBottomPaddingOnCurve: true,
-          border: Border.all(color: neutral30)),
+          border: Border(top: BorderSide(color: currentPage == 1 ? neutral90 : neutral30))),
       items: [
         PersistentBottomNavBarItem(
           activeColorPrimary: primaryDarkColor,

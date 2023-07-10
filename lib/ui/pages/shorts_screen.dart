@@ -113,6 +113,9 @@ class _ShortsScreenState extends State<ShortsScreen> {
                               child: Stack(
                                 alignment: Alignment.bottomCenter,
                                 children: [
+                                  // for you title
+
+                                  // Text("For you " , style: GoogleFonts.poppins(color: Colors.white , fontSize: 18), ),
                                   VideoTile(
                                     video: value.videos![index],
                                     snappedPageIndex: snappedPageIndex,
@@ -134,6 +137,7 @@ class _ShortsScreenState extends State<ShortsScreen> {
                               ),
                             )
                           : TextDetail(
+                              title: value.videos![index].title ?? 'Belum ada judul',
                               caption: value.videos![index].description ??
                                   'Belum ada deskripsi');
                     },

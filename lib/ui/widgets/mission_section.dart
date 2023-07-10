@@ -24,6 +24,9 @@ class Mission extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // loop my mission and print 
+
+
     return Column(
       children: [
         const SizedBox(height: 16),
@@ -81,10 +84,6 @@ class Mission extends StatelessWidget {
                     );
                   }
                 }
-
-                index < myMission!.length
-                    ? print('target: ${myMission![index].target}')
-                    : null;
 
                 return index < myMission!.length
                     ? MissionCard(

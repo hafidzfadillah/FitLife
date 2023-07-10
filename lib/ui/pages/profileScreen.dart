@@ -1,5 +1,6 @@
 import 'package:fitlife/ui/pages/onboarding.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fitlife/ui/home/theme.dart';
@@ -33,6 +34,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         backgroundColor: lightModeBgColor,
         elevation: 0,
+        title: Text("Akun Saya",
+            style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.w600)),
         // leading: IconButton(
         //   color: Color(0xff33333),
         //   icon: Icon(Icons.close, color: Colors.black, size: 30),
@@ -55,6 +61,12 @@ class ProfileBody extends StatelessWidget {
   Future<void> refreshHome(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
+  Future<void> refreshHome(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    userProvider.clearUserData();
+    ConnectionProvider.instance(context).setConnection(true);
+  }
     userProvider.clearUserData();
     ConnectionProvider.instance(context).setConnection(true);
   }
@@ -89,135 +101,126 @@ class ProfileBody extends StatelessWidget {
       }
       return SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+          padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Menu utama",
-                  style: headerTextStyle.copyWith(
-                      fontSize: 20, fontWeight: FontWeight.w600),
-                ),
+                Divider(),
                 SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      child: Center(
-                          child: Text(userProvider.user?.name ?? "",
-                              style: normalText.copyWith(
-                                color: Colors.white,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w600,
-                              ))),
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: Color(0xffFFCA22),
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(userProvider.user?.name ?? "Sobat",
-                            textAlign: TextAlign.center,
-                            style: headerTextStyle.copyWith(
-                                fontSize: 21, fontWeight: FontWeight.w600)),
-                        SizedBox(
-                          height: 5,
+                Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 104,
+                        height: 104,
+                        decoration: BoxDecoration(
+                          color: Color(0xff9EF07B),
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.star,
-                              color: Colors.yellow[700],
-                            ),
-                            Text(
-                              userProvider.user?.coin.toString() ?? "0",
-                              style: headerTextStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.yellow[700]),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text("-"),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              userProvider.user?.isVip == 1
-                                  ? "premium"
-                                  : "Regular",
-                              style: headerTextStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: userProvider.user?.isVip == 1
-                                      ? Colors.yellow[700]
-                                      : Colors.grey[600]),
-                            ),
-                          ],
-                        )
-                      ],
-                    )
-                  ],
+                        child: Center(
+                          child: Image.asset(
+                            "assets/images/avatar_dummy.png",
+                            width: 64,
+                            height: 64,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        userProvider.user?.name ?? "",
+                        style: GoogleFonts.poppins(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      userProvider.user?.isVip == 1
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Vip Hingga",
+                                  style: GoogleFonts.poppins(
+                                      color: Color(0xff484848),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(" 10/08/2023",
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600))
+                              ],
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("",
-                    textAlign: TextAlign.center,
-                    style: subtitleTextStyle.copyWith(
-                      fontSize: 14,
-                    )),
+                
               ],
             ),
             SizedBox(
               height: 40,
             ),
-            Text(
-              "Account",
-              style: headerTextStyle.copyWith(
-                  fontSize: 20, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Column(
+            Row(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                        child: Text("Edit Profile",
-                            style: headerTextStyle.copyWith(fontSize: 15))),
-                    Icon(Icons.arrow_right_rounded, size: 30),
-                  ],
-                ),
-                SizedBox(height: 5),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: Text("Help",
-                            style: headerTextStyle.copyWith(fontSize: 15))),
-                    Icon(Icons.arrow_right_rounded, size: 30),
-                  ],
-                ),
+                Expanded(
+                    child: Text(
+              "Badge",
+              style: GoogleFonts.poppins(
+                  fontSize: 20, fontWeight: FontWeight.w600),
+            )),
+                Text(" Lihat Semua",
+                    style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color:  primaryDarkColor))
+
+              
               ],
+            ),
+            
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height:  70,
+              child: ListView(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+            
+                scrollDirection:  Axis.horizontal,
+            
+                children: [
+                  
+                  
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child:                   Image.asset("assets/images/badge_dummy_1.png", width: 70, height: 70, fit: BoxFit.cover,),
+               
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child:                   Image.asset("assets/images/badge_dummy_2.png", width: 70, height: 70, fit: BoxFit.cover,),
+               
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child:                   Image.asset("assets/images/badge_dummy_3.png", width: 70, height: 70, fit: BoxFit.cover,),
+               
+                  ),
+               
+
+                ],
+              ),
             ),
             SizedBox(
               height: 40,
@@ -228,47 +231,75 @@ class ProfileBody extends StatelessWidget {
                   fontSize: 20, fontWeight: FontWeight.w600),
             ),
             SizedBox(
-              height: 5,
+              height: 20,
             ),
             Column(
               children: [
                 Row(
                   children: [
                     Expanded(
-                        child: Text("Privacy and policy",
-                            style: headerTextStyle.copyWith(fontSize: 15))),
+                        child: Row(
+                          children: [
+                            Image.asset("assets/images/edit_profile_icon.png",
+                                width: 30, height: 30),
+                            SizedBox(width: 10),
+                            Text("Edit Data Diri",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 16, fontWeight: FontWeight.w500)),
+                          ],
+                        )),
+                    Icon(Icons.arrow_right_rounded, size: 30),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Row(
+                      children: [
+                        Image.asset("assets/images/privacy_icon.png",
+                            width: 30, height: 30),
+                        SizedBox(width: 10),
+                        Text("Privacy  And Policy ",
+                            style: GoogleFonts.poppins(
+                                fontSize: 16, fontWeight: FontWeight.w500)),
+                      ],
+                    )),
                     Icon(Icons.arrow_right_rounded, size: 30),
                   ],
                 ),
                 SizedBox(height: 5),
-                GestureDetector(
-                  onTap: () async {
-                    SharedPreferences localStorage =
-                        await SharedPreferences.getInstance();
+                  Row(
+                  children: [
+                    Expanded(
+                        child: GestureDetector(
+                            onTap: () async {
+                        SharedPreferences localStorage =
+                            await SharedPreferences.getInstance();
 
-                    // AddressProvider.instance(context).clearAddress();
-                    SharedPreferences preferences =
-                        await SharedPreferences.getInstance();
-                    await preferences.clear();
+                        // AddressProvider.instance(context).clearAddress();
+                        SharedPreferences preferences =
+                            await SharedPreferences.getInstance();
+                        await preferences.clear();
 
-                    Navigator.of(context, rootNavigator: true)
-                        .pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (_) => OnBoardingScreen()),
-                            (route) => false);
-                  },
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: Text("Keluar",
-                              style: headerTextStyle.copyWith(fontSize: 15))),
-                      Icon(Icons.arrow_right_rounded, size: 30),
-                    ],
-                  ),
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/login', (route) => false);
+                      },
+                          child: Row(
+                                              children: [
+                          Image.asset("assets/images/exit_account_Icon.png",
+                              width: 30, height: 30),
+                          SizedBox(width: 10),
+                          Text("Keluar Akun ",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 16, fontWeight: FontWeight.w500)),
+                                              ],
+                                            ),
+                        )),
+                    Icon(Icons.arrow_right_rounded, size: 30),
+                  ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+               
               ],
             )
           ],

@@ -38,7 +38,7 @@ class CalorieBox extends StatelessWidget {
                     final cellUsed = index < percentage * 100;
                     return Container(
                       decoration: BoxDecoration(
-                        color: cellUsed ? Color(0xff18B279) : Color(0xffC0C0CA),
+                        color: cellUsed ? Color(0xffFFB029) : Color(0xffC0C0CA),
                         borderRadius: BorderRadius.circular(1),
                       ),
                     );

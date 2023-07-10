@@ -1,3 +1,5 @@
+import 'package:fitlife/ui/widgets/NutrionInfoBox.dart';
+import 'package:fitlife/ui/widgets/NutritionBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fitlife/core/viewmodels/connection/connection.dart';
@@ -20,10 +22,12 @@ class RecordFoodScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: lightModeBgColor,
         appBar: CustomAppBar(
-          title: 'Record Makanan',
+          title: 'Aktivitas  Makan Saya',
           backgroundColor: lightModeBgColor,
           elevation: 0,
-          leading: CustomBackButton(onClick: () {
+          leading: CustomBackButton(
+            iconColor:  const Color(0xffFFB029),
+            onClick: () {
             Navigator.pop(context);
           }),
         ),
@@ -69,9 +73,17 @@ class RecordFoodBody extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           children: [
-            DateSelector(
-              userProvider: userProvider,
+              Text(
+              'Log makan',
+              style: normalText.copyWith(
+                  fontSize: 16,
+                  color: const Color(0xff333333),
+                  fontWeight: FontWeight.w600),
             ),
+               const SizedBox(
+              height: 16,
+            ),
+             const UserFoodActivity(),
             const SizedBox(
               height: 16,
             ),
@@ -89,17 +101,9 @@ class RecordFoodBody extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            Text(
-              'Log makan',
-              style: normalText.copyWith(
-                  fontSize: 16,
-                  color: const Color(0xff333333),
-                  fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            const UserFoodActivity()
+          
+         
+          
           ],
         ),
       ));
@@ -277,22 +281,34 @@ class _UserNutrionWidget extends StatelessWidget {
               ),
               CalorieBox(
                   percentage:
-                      (userProvider.myNutrition?.akg.toDouble() ?? 0) / 100),
+                     (userProvider.myNutrition?.akg.toDouble() ?? 0) / 100),
             ],
           ),
           const SizedBox(
             height: 16,
           ),
-          NutrientChart(
-            carbsPercentage:
-                (userProvider.myNutrition?.carbPercentage.toDouble() ?? 0) *
-                    100,
-            fatPercentage:
-                (userProvider.myNutrition?.fatPercentage.toDouble() ?? 0) * 100,
-            proteinPercentage:
-                (userProvider.myNutrition?.proteinPercentage.toDouble() ?? 0) *
-                    100,
+
+
+          SizedBox(
+            height:  16,
           ),
+          NutritionalBar(carbsPercent: userProvider.myNutrition?.carbPercentage.toDouble() ?? 0, fatPercent:
+                  userProvider.myNutrition?.fatPercentage.toDouble() ?? 0, proteinPercent: userProvider.myNutrition?.proteinPercentage.toDouble() ?? 0),
+          const SizedBox(
+            height: 16,
+          ),
+
+          NutritionInfoBox(carbs: userProvider.myNutrition?.carbohydrate ?? 0, protein: userProvider.myNutrition?.protein ?? 0, fat: userProvider.myNutrition?.fat ?? 0)
+          // NutrientChart(
+          //   carbsPercentage:
+          //       (userProvider.myNutrition?.carbPercentage.toDouble() ?? 0) *
+          //           100,
+          //   fatPercentage:
+          //       (userProvider.myNutrition?.fatPercentage.toDouble() ?? 0) * 100,
+          //   proteinPercentage:
+          //       (userProvider.myNutrition?.proteinPercentage.toDouble() ?? 0) *
+          //           100,
+          // ),
         ],
       );
     });

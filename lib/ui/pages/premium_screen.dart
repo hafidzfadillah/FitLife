@@ -3,6 +3,7 @@ import 'package:fitlife/core/viewmodels/user/user_provider.dart';
 import 'package:fitlife/ui/pages/home_screen.dart';
 import 'package:fitlife/ui/pages/main_pages.dart';
 import 'package:fitlife/ui/pages/payment_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/models/transaction/transaction_model.dart';
 import '../home/theme.dart';
@@ -48,17 +49,19 @@ class _PremiumScreenState extends State<PremiumScreen> {
 //         label: Text("Berlangganan",
 //           style: normalText.copyWith(
 //             color: Colors.white, fontWeight: FontWeight.w600)),
-//         backgroundColor: primaryColor,
+//         backgroundColor: Color(0xffFFE590),
 //       ),
 //     ],
 //   ),
 // ),
 
       appBar: CustomAppBar(
-        title: 'Fitlife Premium',
+        title: 'VIP Member ',
         backgroundColor: lightModeBgColor,
         elevation: 0,
-        leading: CustomBackButton(onClick: () {
+        leading: CustomBackButton(
+          iconColor:  Color(0xffFFE590),
+          onClick: () {
           Navigator.pop(context);
         }),
       ),
@@ -100,7 +103,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                         color: plantType == 'monthly'
-                            ? primaryColor
+                            ? Color(0xffFFE590)
                             : Colors.transparent,
                         width: 2),
                     color: Colors.white,
@@ -163,7 +166,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                         color: plantType == 'yearly'
-                            ? primaryColor
+                            ? Color(0xffFFE590)
                             : Colors.transparent,
                         width: 2),
                     color: Colors.white,
@@ -316,14 +319,14 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       },
                       child: Text(
                         'Berlangganan',
-                        style: normalText.copyWith(
-                          fontSize: 16,
-                          color: Colors.white,
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          color: Colors.black,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: primaryColor, // warna latar
+                        primary: Color(0xffFFE590), // warna latar
                         padding:
                             const EdgeInsets.symmetric(vertical: 16), // padding
                         shape: RoundedRectangleBorder(
@@ -364,9 +367,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       },
                       child: Text(
                         'Coba Gratis',
-                        style: normalText.copyWith(
-                          fontSize: 16,
-                          color: primaryColor, // warna teks
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          color: Color(0xffFFE590), // warna teks
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -377,7 +380,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ), // bentuk
                         side: BorderSide(
-                          color: primaryColor, // warna garis pinggir
+                          color: Color(0xffFFE590), // warna garis pinggir
                           width: 2, // ketebalan garis pinggir
                         ),
                       ),
@@ -438,7 +441,7 @@ class PremiumFeature extends StatelessWidget {
   Widget _buildFeature(String title, IconData icon) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: primaryColor),
+        Icon(icon, size: 16, color: Color(0xffFFE590)),
         const SizedBox(width: 8),
         Text(
           title,

@@ -103,7 +103,7 @@ class UserService {
 
     String dateStr = DateFormat('yyyy-MM-dd').format(date ?? DateTime.now());
 
-    APIResponse response = await api.get(api.endpoint.getDailyData,
+    APIResponse response = await api.get(api.endpoint.getDailyDataDetail,
         useToken: true, token: token, data: {"date": dateStr});
 
     return ApiResult<NutrionModel>.fromJson(response.data?['data'],
@@ -126,6 +126,8 @@ class UserService {
     // print('RSP Mission : ${response.data}');
     // print('RSP Mission Data : ${response.data?['data']}');
 
+    return ApiResultList<MyDayModel>.fromJson(response.data,
+        (data) => data.map((e) => MyDayModel.fromJson(e)).toList(), "data");
     return ApiResultList<MyDayModel>.fromJson(response.data,
         (data) => data.map((e) => MyDayModel.fromJson(e)).toList(), "data");
   }
@@ -411,11 +413,18 @@ class UserService {
         response.data, (data) => TransactionModel.fromJson(data), "data");
   }
 
-  Future<void> convertBamboo(int coin) async {
+  Future<String> convertBamboo(int coin) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('access_token');
 
     APIResponse response = await api.post(api.endpoint.convertBamboo,
         useToken: true, token: token, data: {"coin": coin});
+
+    // if status code 402
+    if (response.statusCode == 402) {
+      return  response.data?['message'];
+    } else {
+      return "success";
+    }
   }
 }

@@ -93,7 +93,7 @@ class MyMissionModel extends Serializable {
         typeTarget: json['type_target'] ?? "",
         status: json['status'] ?? "",
         date: json['date'] ?? "",
-        percentageSuccess: json['percentage_success'],
+        percentageSuccess: json['percentage_success'] ?? 0,
         route: json['route'],
       );
   @override
@@ -103,13 +103,12 @@ class MyMissionModel extends Serializable {
         "icon": icon,
         "color_theme": colorTheme.toString(),
         "coin": coin,
-        "coin": coin,
         "target": target,
         "current": current,
         "type_target": typeTarget,
         "status": status,
         "date": date,
-        "percentange_success": percentageSuccess,
+        "percentage_success": percentageSuccess,
         'route': route
       };
 }

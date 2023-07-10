@@ -36,7 +36,7 @@ class _RecordWaterScreenState extends State<RecordWaterScreen> {
             iconColor: Color(0xff6FB6E1),
             onClick: () {
               Navigator.pop(context);
-            }),
+            })
       ),
       body: ChangeNotifierProvider(
         create: (context) => UserProvider(),
@@ -172,6 +172,9 @@ class _UserDrinkProgress extends StatelessWidget {
 
       final mission = userProvider.currentDay!.missions!
           .firstWhere((m) => m.name == "Catat Aktivitas Minum");
+
+      print(mission);
+
       final int currentDrink = mission.current;
 
       return Center(
@@ -203,6 +206,7 @@ class _UserHistoryDrink extends StatelessWidget {
           child: Text('Belum ada catatan'),
         );
       }
+
 
       return ListView.builder(
         shrinkWrap: true,

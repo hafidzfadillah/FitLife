@@ -48,7 +48,7 @@ class TopUpBambooSuccessScreen extends StatelessWidget {
                   title: 'Kembali ke halaman utama',
                   style: GoogleFonts.poppins(color: Colors.black),
                   onClick: () {
-                    Navigator.pushNamed(context, '/topup-bamboo-success');
+                    Navigator.pushNamed(context, '/home');
                   }),
             ],
           ),

@@ -46,6 +46,7 @@ class CustomFormField extends StatelessWidget {
           style: TextStyle(fontSize: 14),
           inputFormatters: inputFormatters,
           validator: validator,
+          
           controller: state,
           maxLines: maxLines,
           keyboardType: inputType,

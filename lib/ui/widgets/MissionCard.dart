@@ -55,8 +55,9 @@ class MissionCard extends StatelessWidget {
                       angle: 3 * pi / 4,
                       child: CircularProgressIndicator(
                         backgroundColor: Colors.grey[300],
-                        valueColor: AlwaysStoppedAnimation(Color(int.parse(missionColor ?? '7FB06B'))),
-                        value: progress / 100,
+                        valueColor: AlwaysStoppedAnimation(
+                            Color(int.parse(missionColor ?? '7FB06B'))),
+                        value: progress != null ? progress / 100 : null,
                         strokeWidth: 60,
                       ),
                     ),

@@ -665,16 +665,31 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> convertBamboo(int coin) async {
+  Future<bool> convertBamboo(int coin) async {
     try {
-      await userService.convertBamboo(coin);
+      String result = await userService.convertBamboo(coin);
 
       notifyListeners();
+
+      if (result == 'success') {
+        return true;
+        
+      } else {
+        return false;
+      }
+
+ 
+
     } catch (e, stacktrace) {
+      
       debugPrint("Error: ${e.toString()}");
+
       debugPrint("Stacktrace: ${stacktrace.toString()}");
     }
+
     notifyListeners();
+
+    return false;
   }
 
   // Set event login

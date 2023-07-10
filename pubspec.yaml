@@ -76,6 +76,9 @@ dependencies:
   floating_draggable_widget: ^2.1.2
   flutter_intro: ^3.0.2
   lottie: ^1.4.2
+  google_maps_flutter: ^2.2.6
+  geolocator: ^9.0.2
+  location: ^4.4.0
 
 dev_dependencies:
   flutter_test:
