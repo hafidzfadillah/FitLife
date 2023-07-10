@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:fitlife/core/viewmodels/categories/categories_provider.dart';
 import 'package:fitlife/core/viewmodels/connection/connection.dart';
 
+import 'core/viewmodels/checkin/checkin_provider.dart';
 import 'core/viewmodels/classify/classify_provider.dart';
 import 'core/viewmodels/food/food_provider.dart';
 import 'core/viewmodels/product/product_provider.dart';
@@ -25,6 +26,7 @@ class GlobalProviders {
         ChangeNotifierProvider(create: (create) => FoodProvider()),
         ChangeNotifierProvider(create: (create) => ProductProvider()),
         ChangeNotifierProvider(create: (create) => ProgramProvider()),
-        ChangeNotifierProvider(create: (create) => VideoProvider())
+        ChangeNotifierProvider(create: (create) => VideoProvider()),
+        ChangeNotifierProvider(create: (create) => CheckinProvider())
       ];
 }

@@ -21,7 +21,6 @@ class ProgramScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: lightModeBgColor,
       body: MultiProvider(
@@ -158,7 +157,7 @@ class ProgramBody extends StatelessWidget {
                         } else {
                           Navigator.pushNamed(
                             context,
-                            '/record-sport',
+                            '/sport-record',
                           );
                         }
                       },

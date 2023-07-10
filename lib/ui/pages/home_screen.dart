@@ -2,9 +2,16 @@
 
 import 'dart:math';
 
+import 'package:fitlife/core/viewmodels/checkin/checkin_provider.dart';
+import 'package:fitlife/ui/widgets/button.dart';
+import 'package:fitlife/ui/widgets/reward_item.dart';
+import 'package:floating_draggable_widget/floating_draggable_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     userProvider.getUserData();
-    userProvider.getMyMission();
+    // userProvider.getMyMission();
     print('trigger');
   }
 
@@ -52,7 +59,32 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return FloatingDraggableWidget(
+      floatingWidget: InkWell(
+          onTap: () {
+            Navigator.of(context, rootNavigator: true).pushNamed('/chatbot');
+          },
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: primaryColor.withOpacity(0.7)),
+                width: 8.h,
+                height: 8.h,
+              ),
+              Lottie.asset(
+                'assets/json/chatbot.json',
+                repeat: true,
+                reverse: false,
+              ),
+            ],
+          )),
+      autoAlign: true,
+      floatingWidgetHeight: 8.h,
+      floatingWidgetWidth: 8.h,
+      mainScreenWidget: Scaffold(
         backgroundColor: lightModeBgColor,
         body: Consumer2<ConnectionProvider, UserProvider>(
             builder: (context, connectionProv, userProvider, child) {
@@ -71,12 +103,6 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
 
-          if (userProvider.currentDay == null && userProvider.onSearch) {
-            return Container(
-              child: Center(child: CircularProgressIndicator()),
-            );
-          }
-
           return SafeArea(
               child: RefreshIndicator(
             onRefresh: () => refreshHome(context),
@@ -90,6 +116,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   children: [
+                    InkWell(
+                      onTap: () {
+                        _showCheckinModal(context, userProvider);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(1.h),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(1.h),
+                            color: Color(0xFFFFE590)),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Text(
+                              'Check-In harian',
+                              style: GoogleFonts.poppins(),
+                            )),
+                            Icon(Icons.chevron_right)
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
                     Container(
                       color: Colors.white,
                       child: Row(children: [
@@ -114,11 +164,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   )),
-                                  Text(
-                                    'Lihat detail',
-                                    style: GoogleFonts.poppins(
-                                      color: primaryDarkColor,
-                                      fontWeight: FontWeight.w500,
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Text(
+                                      'Lihat detail',
+                                      style: GoogleFonts.poppins(
+                                        color: primaryDarkColor,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   )
                                 ],
@@ -136,9 +189,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 lineHeight: 1.h,
                                 padding: EdgeInsets.all(0),
                                 barRadius: Radius.circular(1.h),
-                                percent: userProvider.currentDay == null ? 0 : (userProvider
-                                        .currentDay!.missionSuccessCount! /
-                                    userProvider.currentDay!.missions!.length),
+                                percent: userProvider.currentDay == null
+                                    ? 0
+                                    : (userProvider
+                                            .currentDay!.percentageSuccess! /
+                                        100),
                                 backgroundColor: neutral30,
                                 progressColor: primaryColor,
                               ),
@@ -163,7 +218,122 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ));
-        }));
+        }),
+      ),
+    );
+  }
+
+  void _showCheckinModal(BuildContext context, UserProvider userProv) async {
+    final claim = await showModalBottomSheet(
+      useRootNavigator: true,
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(2.h),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(2.h),
+                  topRight: Radius.circular(2.h))),
+          child: Column(
+            children: [
+              Container(
+                width: 0.5.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(2.h),
+                  color: neutral30,
+                ),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Text(
+                'Check-in Harian',
+                style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500, fontSize: 16),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Expanded(child: DailyCheckin()),
+              Consumer<CheckinProvider>(builder: (context, checkProvider, _) {
+                return checkProvider.list != null &&
+                        checkProvider.list!.isNotEmpty
+                    ? RoundedButton(
+                        title: 'Klaim',
+                        style: GoogleFonts.poppins(color: blackColor),
+                        background: primaryColor,
+                        onClick: () async {
+                          if(checkProvider.currentDay != null && checkProvider.currentDay!.rewardReceived == 1) {
+                            EasyLoading.showInfo('Kamu sudah check-in hari ini');
+                            return;
+                          }
+                          EasyLoading.show(
+                              status: 'Memroses permintaan kamu..');
+                          bool result = await checkProvider
+                              .claimReward('${checkProvider.currentDay?.id}');
+
+                          if (result) {
+                            EasyLoading.showSuccess(
+                                'Hore, klaim reward berhasil!');
+                            Navigator.of(context).pop(result);
+                          } else {
+                            EasyLoading.showError(
+                                'Klaim reward gagal :( Silakan coba lagi');
+                          }
+                        },
+                        width: double.infinity)
+                    : Container();
+              })
+            ],
+          ),
+        );
+      },
+    );
+
+    if (claim != null && claim) {
+      userProv.getUserData();
+      userProv.getMyMission();
+      CheckinProvider.instance(context).getRewards();
+    }
+  }
+}
+
+class DailyCheckin extends StatelessWidget {
+  const DailyCheckin({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<CheckinProvider>(
+      builder: (context, value, child) {
+        if (value.list == null) {
+          if (!value.onSearch) {
+            value.getRewards();
+          }
+
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (value.list!.isEmpty) {
+          return Center(
+            child: Text('Tidak ada data'),
+          );
+        }
+
+        return GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              childAspectRatio: 0.7,
+              mainAxisSpacing: 1.h,
+              crossAxisSpacing: 1.h),
+          itemCount: value.list!.length,
+          itemBuilder: (context, index) =>
+              RewardItem(model: value.list![index], index: index + 1),
+        );
+      },
+    );
   }
 }
 
@@ -176,15 +346,11 @@ class UserNutrion extends StatelessWidget {
       if (userProvider.currentDay == null && !userProvider.onSearch) {
         // userProvider.getNutrion();
 
-        return Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            child: Center(child: CircularProgressIndicator()));
+        return Center(child: CircularProgressIndicator());
       }
       if (userProvider.currentDay == null && userProvider.onSearch) {
         // if the categories are being searched, show a skeleton loading
-        return Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            child: const CircularProgressIndicator());
+        return Center(child: CircularProgressIndicator());
       }
 
       if (userProvider.currentDay == null) {
@@ -269,12 +435,16 @@ class MyMisssion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
-      if (userProvider.currentDay?.missions == null && userProvider.onSearch) {
+      if (userProvider.currentDay?.missions == null) {
         // if the categories are being searched, show a skeleton loading
+        if (!userProvider.onSearch) {
+          userProvider.getMyMission();
+        }
+
         return Center(child: CircularProgressIndicator());
       }
-      if (userProvider.currentDay?.missions == null) {
-        // if the categories have been loaded, show the category chips
+
+      if (userProvider.currentDay!.missions!.isEmpty) {
         return Center(
           child: Container(
             margin: const EdgeInsets.only(bottom: 10),

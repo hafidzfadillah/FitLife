@@ -28,6 +28,7 @@ class Api {
   String storeDrink = "$_baseServer/drink/store";
   String historyDrink = "$_baseServer/drink/history";
   String historyFood = "$_baseServer/foods-track/history";
+  String dailyLogin = "$_baseServer/daily-login";
 
   /// * -------------------
   ///   * Product Endpoint
@@ -60,7 +61,7 @@ class Api {
 
   /// * -------------------
 
-   /// * -------------------
+  /// * -------------------
   /// * Weight endpoint
   String getWeight = "$_baseServer/weight-track/history";
   String storeWeight = "$_baseServer/weight-track/store";
@@ -75,7 +76,6 @@ class Api {
   String getExercise = "$_baseServer/exercise";
   String searchExercise = "$_baseServer/exercise/search";
   String storeExercise = "$_baseServer/exercise-track/store";
-
 
   String convertBamboo = "$_baseServer/convertbamboo";
 }

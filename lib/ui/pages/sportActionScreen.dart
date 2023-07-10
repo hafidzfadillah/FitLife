@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -196,7 +197,7 @@ class _SportActionScreenState extends State<SportActionScreen>
                               Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => MainPages()))
+                                          builder: (context) => Intro(child: MainPages())))
                                   .then((value) {
                                 if (value != null && value == true) {
                                   // Refresh widget disini

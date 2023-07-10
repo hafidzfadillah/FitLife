@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         if (response == true) {
           EasyLoading.showSuccess('Selamat datang kembali!');
-          Navigator.pushNamed(context, '/home');
+          Navigator.pushNamedAndRemoveUntil(context, '/home',  (route) => false);
         } else {
           EasyLoading.showError('Email atau password salah');
         }

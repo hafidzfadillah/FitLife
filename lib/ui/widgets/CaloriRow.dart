@@ -10,10 +10,10 @@ class CaloriRow extends StatelessWidget {
     required this.kaloriTersedia,
   }) : super(key: key);
 
-  final int target;
-  final int asupan;
-  final int aktivitas;
-  final int kaloriTersedia;
+  final num target;
+  final num asupan;
+  final num aktivitas;
+  final num kaloriTersedia;
 
   @override
   Widget build(BuildContext context) {

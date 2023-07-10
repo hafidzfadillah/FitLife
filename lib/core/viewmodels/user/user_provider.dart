@@ -124,7 +124,6 @@ class UserProvider extends ChangeNotifier {
       final result = await userService.getUserData();
       if (result.data.id != null) {
         _user = result.data;
-        print('JSON_USER : ${_user!.toJson().toString()}');
         // setOnSearch(false);
         notifyListeners();
 
@@ -207,6 +206,8 @@ class UserProvider extends ChangeNotifier {
 
         _currentDay =
             _myMission!.firstWhere((element) => element.isToday ?? false);
+
+        print('current day mission count : ${_currentDay!.missions!.length}');
       } else {
         _myMission = [];
       }
@@ -665,7 +666,6 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> convertBamboo(int coin) async {
-
     try {
       await userService.convertBamboo(coin);
 
@@ -676,7 +676,6 @@ class UserProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
 
   // Set event login
   void setOnSearch(bool value) {

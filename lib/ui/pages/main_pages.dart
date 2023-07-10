@@ -3,6 +3,7 @@ import 'package:fitlife/ui/pages/profileScreen.dart';
 import 'package:fitlife/ui/pages/shop_screen.dart';
 import 'package:fitlife/ui/pages/shorts_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:fitlife/ui/home/theme.dart';
 import 'package:fitlife/ui/pages/home_screen.dart';
@@ -10,6 +11,7 @@ import 'package:fitlife/ui/pages/article_screen.dart';
 import 'package:fitlife/ui/pages/chat_bot.dart';
 import 'package:fitlife/ui/pages/vita_mart.dart';
 import 'package:fitlife/ui/pages/programScreen.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class MainPages extends StatefulWidget {
   const MainPages({Key? key}) : super(key: key);
@@ -20,48 +22,76 @@ class MainPages extends StatefulWidget {
 
 class _MainPagesState extends State<MainPages> {
   int currentPage = 0;
-  PersistentTabController _controller =
+  final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
 
-  List<PersistentBottomNavBarItem> _items = [
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.home_filled),
-      title: 'Home',
-      activeColorPrimary: primaryDarkColor,
-      inactiveColorPrimary: Colors.grey,
-    ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.video_library),
-      title: 'Reels',
-      activeColorPrimary: primaryDarkColor,
-      inactiveColorPrimary: Colors.grey,
-    ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.storefront),
-      title: 'Shop',
-      activeColorPrimary: primaryDarkColor,
-      inactiveColorPrimary: Colors.grey,
-    ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.leaderboard),
-      title: 'Leaderboard',
-      activeColorPrimary: primaryDarkColor,
-      inactiveColorPrimary: Colors.grey,
-    ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.badge),
-      title: 'Profil',
-      activeColorPrimary: primaryDarkColor,
-      inactiveColorPrimary: Colors.grey,
-    ),
-  ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
+
       controller: _controller,
-      items: _items,
+      decoration: NavBarDecoration(
+          adjustScreenBottomPaddingOnCurve: true,
+          border: Border.all(color: neutral30)),
+      items: [
+        PersistentBottomNavBarItem(
+          activeColorPrimary: primaryDarkColor,
+          icon: SvgPicture.asset(
+            currentPage == 0
+                ? 'assets/images/home_active.svg'
+                : 'assets/images/home_nonactive.svg',
+            width: 4.h,
+            height: 4.h,
+          ),
+        ),
+        PersistentBottomNavBarItem(
+          activeColorPrimary: primaryDarkColor,
+          icon: SvgPicture.asset(
+            currentPage == 1
+                ? 'assets/images/reel_active.svg'
+                : 'assets/images/reel_nonactive.svg',
+            width: 4.h,
+            height: 4.h,
+          ),
+        ),
+        PersistentBottomNavBarItem(
+          activeColorPrimary: primaryDarkColor,
+          icon: SvgPicture.asset(
+            currentPage == 2
+                ? 'assets/images/shop_active.svg'
+                : 'assets/images/shop_nonactive.svg',
+            width: 4.h,
+            height: 4.h,
+          ),
+        ),
+        PersistentBottomNavBarItem(
+          activeColorPrimary: primaryDarkColor,
+          icon: SvgPicture.asset(
+            currentPage == 3
+                ? 'assets/images/leaderboard_active.svg'
+                : 'assets/images/leaderboard_nonactive.svg',
+            width: 4.h,
+            height: 4.h,
+          ),
+        ),
+        PersistentBottomNavBarItem(
+          activeColorPrimary: primaryDarkColor,
+          icon: SvgPicture.asset(
+            currentPage == 5
+                ? 'assets/images/profile_active.svg'
+                : 'assets/images/profile_nonactive.svg',
+            width: 4.h,
+            height: 4.h,
+          ),
+        ),
+      ],
       screens: [
         const HomeScreen(),
         // ProgramScreen(),
@@ -75,7 +105,7 @@ class _MainPagesState extends State<MainPages> {
       ],
       backgroundColor: _controller.index == 1 ? blackColor : Colors.white,
       navBarStyle:
-          NavBarStyle.style3, // Choose the nav bar style with this property.
+          NavBarStyle.style12, // Choose the nav bar style with this property.
       itemAnimationProperties: const ItemAnimationProperties(
         // Navigation Bar's items animation properties.
         duration: Duration(milliseconds: 200),
@@ -84,7 +114,7 @@ class _MainPagesState extends State<MainPages> {
       screenTransitionAnimation: const ScreenTransitionAnimation(
         // Screen transition animation on change of selected tab.
         animateTabTransition: true,
-        curve: Curves.ease,
+        curve: Curves.linear,
         duration: const Duration(milliseconds: 200),
       ),
       onItemSelected: ((value) {

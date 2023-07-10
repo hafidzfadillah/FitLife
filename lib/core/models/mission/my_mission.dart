@@ -1,13 +1,13 @@
 import 'package:fitlife/core/models/api/api_result_model.dart';
 
 class MyDayModel extends Serializable {
-   int? day;
-   bool? isToday;
-   int? percentageSuccess;
-   int? missionSuccessCount;
-   int? targetCalories;
-   int? calorieLeft;
-   int? activityCalories;
+  int? day;
+  bool? isToday;
+  num? percentageSuccess;
+  num? missionSuccessCount;
+  num? targetCalories;
+  num? calorieLeft;
+  num? activityCalories;
   List<MyMissionModel>? missions;
 
   MyDayModel(
@@ -21,15 +21,13 @@ class MyDayModel extends Serializable {
       this.missions});
 
   MyDayModel.fromJson(Map<String, dynamic> json) {
-    
-
     day = json['day'];
     isToday = json['is_today'];
-    percentageSuccess = json['percentage_success'] ?? 0;
+    percentageSuccess = json['percentage_success'] ?? 0.0;
     missionSuccessCount = json['mission_success_count'] ?? 0;
-    targetCalories = json['targetCalories'] ?? 0;
-    calorieLeft = json['calorieLeft'] ?? 0;
-    activityCalories = json['activityCalories'] ?? 0;
+    targetCalories = json['targetCalories'] == 0 ? 0.0 : json['targetCalories'];
+    calorieLeft = json['calorieLeft'] == 0 ? 0.0 : json['calorieLeft'];
+    activityCalories = json['activityCalories'] == 0 ? 0.0 : json['activityCalories'];
     if (json['missions'] != null) {
       missions = <MyMissionModel>[];
       json['missions'].forEach((v) {
@@ -95,7 +93,7 @@ class MyMissionModel extends Serializable {
         typeTarget: json['type_target'] ?? "",
         status: json['status'] ?? "",
         date: json['date'] ?? "",
-        percentageSuccess: json['percentange_success'] ?? 0,
+        percentageSuccess: json['percentage_success'],
         route: json['route'],
       );
   @override

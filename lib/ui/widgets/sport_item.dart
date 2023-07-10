@@ -45,13 +45,13 @@ class SportItem extends StatelessWidget {
                   child: FloatingActionButton.extended(
                       icon: Icon(
                         Icons.accessibility_new_outlined,
-                        color: primaryColor,
+                        color: blackColor,
                       ),
-                      backgroundColor: Colors.white70,
+                      backgroundColor: Colors.white70.withOpacity(0.8),
                       onPressed: onHelp,
                       label: Text(
                         'AI Guide',
-                        style: GoogleFonts.poppins(color: primaryColor),
+                        style: GoogleFonts.poppins(color: blackColor),
                       )),
                   // child: IconButton(onPressed: onHelp, icon: Icon(Icons.help_outline, color: Colors.white,))
                 )

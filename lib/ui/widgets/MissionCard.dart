@@ -10,7 +10,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 class MissionCard extends StatelessWidget {
   const MissionCard({
     Key? key,
-    this.progress,
+    required this.progress,
     this.missionColor,
     required this.title,
     required this.target,
@@ -23,7 +23,7 @@ class MissionCard extends StatelessWidget {
     required this.route,
   }) : super(key: key);
 
-  final double? progress;
+  final double progress;
   final String? missionColor;
   final String title;
   final int target;
@@ -40,7 +40,7 @@ class MissionCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context, rootNavigator: true)
-            .pushNamed(screen.toLowerCase());
+            .pushNamed(route.toLowerCase());
       },
       child: Container(
         child: Column(
@@ -55,8 +55,8 @@ class MissionCard extends StatelessWidget {
                       angle: 3 * pi / 4,
                       child: CircularProgressIndicator(
                         backgroundColor: Colors.grey[300],
-                        valueColor: AlwaysStoppedAnimation(Colors.amber),
-                        value: progress,
+                        valueColor: AlwaysStoppedAnimation(Color(int.parse(missionColor ?? '7FB06B'))),
+                        value: progress / 100,
                         strokeWidth: 60,
                       ),
                     ),

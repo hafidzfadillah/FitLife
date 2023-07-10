@@ -139,7 +139,7 @@ class _ChatBotBodyState extends State<ChatBotBody> {
                                   pause: Duration(seconds: 2000),
                                   animatedTexts: [
                                     TypewriterAnimatedText(
-                                        "Halo , kamu bisa tanya apapu kepada aku seputar kesehatan tubuh",
+                                        "Halo , kamu bisa tanya aku apapun seputar kesehatan tubuh",
                                         textStyle: GoogleFonts.poppins())
                                   ]),
                             ),

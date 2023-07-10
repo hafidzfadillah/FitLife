@@ -75,8 +75,6 @@ class UserService {
         await api.post(api.endpoint.getUser, useToken: true, token: token);
     final userData = response.data;
 
-    print('RSP USER ${userData}');
-
     return ApiResult<UserModel>.fromJson(
         userData, (data) => UserModel.fromJson(data), "data");
   }
@@ -91,8 +89,6 @@ class UserService {
     APIResponse response = await api.post(api.endpoint.register, data: data);
 
     final userData = response.data;
-
-    print(userData?['access_token'] ?? 'no token');
 
     // Save user data to shared preference.
     await saveUserDaftar(userData!);
@@ -123,17 +119,15 @@ class UserService {
 
     print(dateStr);
 
-    APIResponse response = await api.get(api.endpoint.getDailyData,
-        useToken: true, token: token);
+    APIResponse response =
+        await api.get(api.endpoint.getDailyData, useToken: true, token: token);
 
     // print('RSP : $response');
     // print('RSP Mission : ${response.data}');
     // print('RSP Mission Data : ${response.data?['data']}');
 
-    return ApiResultList<MyDayModel>.fromJson(
-        response.data,
-        (data) => data.map((e) => MyDayModel.fromJson(e)).toList(),
-        "data");
+    return ApiResultList<MyDayModel>.fromJson(response.data,
+        (data) => data.map((e) => MyDayModel.fromJson(e)).toList(), "data");
   }
 
   Future<ApiResultList<UserDrinkModel>?> storeDrink() async {
@@ -417,16 +411,11 @@ class UserService {
         response.data, (data) => TransactionModel.fromJson(data), "data");
   }
 
-
-  Future<void>  convertBamboo(int coin ) async {
-      final prefs = await SharedPreferences.getInstance();
+  Future<void> convertBamboo(int coin) async {
+    final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('access_token');
 
     APIResponse response = await api.post(api.endpoint.convertBamboo,
         useToken: true, token: token, data: {"coin": coin});
-
-
-
-
   }
 }

@@ -81,7 +81,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const RecordWaterScreen());
       case '/vita-pulse':
         return MaterialPageRoute(builder: (_) => const VitaPulseScreen());
-      case '/record-sport':
+      case '/sport-record':
         return MaterialPageRoute(builder: (_) => const RecordSportScreen());
       case '/list-sport':
         return MaterialPageRoute(

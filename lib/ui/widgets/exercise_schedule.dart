@@ -129,16 +129,16 @@ class _ExerciseScheduleState extends State<ExerciseSchedule> {
                 if (widget.exercises[currentWeek]['days'][selectedDay]
                         ['status'] !=
                     0) {
-                  if (widget.isPremium == 0) {
-                    Navigator.pushNamed(
-                      context,
-                      '/premium',
-                    );
-                  } else {
+                  // if (widget.isPremium == 0) {
+                  //   Navigator.pushNamed(
+                  //     context,
+                  //     '/premium',
+                  //   );
+                  // } else {
                     Navigator.pushNamed(context, '/list-sport',
                         arguments: widget.exercises[currentWeek]['days']
                             [selectedDay]);
-                  }
+                  // }
                 } else {
                   Fluttertoast.showToast(
                       msg: 'Selesaikan sesi sebelumnya terlebih dahulu');

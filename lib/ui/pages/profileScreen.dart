@@ -1,3 +1,4 @@
+import 'package:fitlife/ui/pages/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,17 +51,16 @@ class ProfileBody extends StatelessWidget {
   const ProfileBody({
     super.key,
   });
-  
-    Future<void> refreshHome(BuildContext context) async {
-      final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-      userProvider.clearUserData();
-      ConnectionProvider.instance(context).setConnection(true);
-    }
+  Future<void> refreshHome(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    userProvider.clearUserData();
+    ConnectionProvider.instance(context).setConnection(true);
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Consumer2<ConnectionProvider, UserProvider>(
         builder: (context, connectionProv, userProvider, child) {
       if (connectionProv.internetConnected == false) {
@@ -108,8 +108,7 @@ class ProfileBody extends StatelessWidget {
                   children: [
                     Container(
                       child: Center(
-                          child: Text(
-                              userProvider.user?.name ?? "",
+                          child: Text(userProvider.user?.name ?? "",
                               style: normalText.copyWith(
                                 color: Colors.white,
                                 fontSize: 30,
@@ -252,8 +251,11 @@ class ProfileBody extends StatelessWidget {
                         await SharedPreferences.getInstance();
                     await preferences.clear();
 
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/login', (route) => false);
+                    Navigator.of(context, rootNavigator: true)
+                        .pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (_) => OnBoardingScreen()),
+                            (route) => false);
                   },
                   child: Row(
                     children: [

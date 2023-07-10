@@ -82,6 +82,10 @@ class Mission extends StatelessWidget {
                   }
                 }
 
+                index < myMission!.length
+                    ? print('target: ${myMission![index].target}')
+                    : null;
+
                 return index < myMission!.length
                     ? MissionCard(
                         progress:

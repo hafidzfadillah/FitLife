@@ -79,7 +79,6 @@ class BaseAPI implements BaseAPIImpl {
           options: getHeaders(useToken: useToken, token: token ?? ''),
           data: data,
           queryParameters: param);
-      print(result);
       return _parseResponse(result);
     } on DioError catch (e) {
       return APIResponse.failure(e.response?.statusCode ?? 500);
@@ -101,7 +100,6 @@ class BaseAPI implements BaseAPIImpl {
   }
 
   Future<APIResponse> _parseResponse(Response? response) async {
-    print('Parse rsp: (${response?.statusCode}) $response');
     if (response?.data is List<dynamic>) {
       Map<String, dynamic> data = {'data': response?.data};
 

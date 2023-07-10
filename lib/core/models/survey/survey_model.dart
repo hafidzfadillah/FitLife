@@ -23,10 +23,10 @@ class SurveyModel extends Serializable {
   factory SurveyModel.fromJson(Map<String, dynamic> json) {
     print("JSON :: $json");
     return SurveyModel(
-        bmi: json['bmi'],
-        idealWeight: json['ideal_weight'],
-        recommendedWeight: json['recommended_weight'],
-        dailyCalories: json['daily_calories'],
+        bmi: json['bmi'] ?? 0,
+        idealWeight: json['ideal_weight'] ?? 0,
+        recommendedWeight: json['recommended_weight'] ?? 0,
+        dailyCalories: json['daily_calories'] ?? 0,
         bmiClassification: json['bmi_classification'],
         warning: json['warning'],
         programs: Programs.fromJson(json['programs']));
