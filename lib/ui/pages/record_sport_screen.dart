@@ -166,7 +166,9 @@ class _RecordSportScreenState extends State<RecordSportScreen> {
         title: 'Aktivitas Olahraga',
         backgroundColor: lightModeBgColor,
         elevation: 0,
-        leading: CustomBackButton(onClick: () {
+        leading: CustomBackButton(
+          iconColor:  Color(0xffF9D171),
+          onClick: () {
           Navigator.pop(context);
         }),
       ),

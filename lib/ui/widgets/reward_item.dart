@@ -26,15 +26,15 @@ class RewardItem extends StatelessWidget {
                   : neutral30)),
       child: Column(
         children: [
-          Stack(
+             model.rewardType != 'type_vip_subscription' ?  Stack(
             alignment: Alignment.center,
             children: [
-              SvgPicture.asset(
+             SvgPicture.asset(
                 model.rewardReceived == 1 ||
                         model.loginDate !=
                             DateFormat('yyyy-MM-dd').format(DateTime.now())
                     ? 'assets/images/claimed_coin.svg'
-                    : 'assets/images/badge_coin.svg',
+                    :  'assets/images/badge_coin.svg',
                 width: 4.h,
                 height: 4.h,
               ),
@@ -46,7 +46,11 @@ class RewardItem extends StatelessWidget {
                     )
                   : Text('${model.rewardValue}')
             ],
-          ),
+          ) :   SvgPicture.asset(
+               'assets/images/vip_icon.svg',
+                width: 4.h,
+                height: 4.h,
+              ),
           SizedBox(
             height: 2.h,
           ),

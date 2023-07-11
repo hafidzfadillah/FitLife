@@ -43,14 +43,14 @@ class VitaPulseScreen extends StatelessWidget {
               children: [
                 Image.asset('assets/images/icon_misi_6.png'),
                 const SizedBox(height: 20),
-                Text('Terhubung dengan VitaPulse',
+                Text('Terhubung dengan Fita Pulse',
                     style: normalText.copyWith(
                         fontSize: 16,
                         color: const Color(0xff333333),
                         fontWeight: FontWeight.w600)),
                 const SizedBox(height: 16),
                 Text(
-                    'Untuk terhubung dengan Vitapulse , kamu perlu menyakalan bluetooth dan dekatkan dengan device VitaPulse',
+                    'Untuk terhubung dengan Fita Pulse , kamu perlu menyakalan bluetooth dan dekatkan dengan device Fita Pulse',
                     textAlign: TextAlign.center,
                     style: normalText.copyWith(
                         fontSize: 14,

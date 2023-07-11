@@ -1,6 +1,7 @@
 import 'package:fitlife/ui/home/theme.dart';
 import 'package:fitlife/ui/pages/premium_screen.dart';
 import 'package:fitlife/ui/pages/topup_bamboo_screen.dart';
+import 'package:fitlife/ui/pages/vita_mart.dart';
 import 'package:fitlife/ui/widgets/button.dart';
 import 'package:fitlife/ui/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
@@ -140,6 +141,21 @@ class ShopScreen extends StatelessWidget {
                     description:
                         'kamu dapat menggunakan bamboo untuk akses ke Pandai (Pandan AI)',
                   ),
+                  const SizedBox(height: 15.0),
+                  ShopCardItem(
+                    title: 'Barang Fisik ',
+                    color: 0xffDAF2ED,
+                    onPressed: () {
+                            Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                              builder: ((context) => VitaMartScreen())));
+                        
+                    },
+                    iconImage: 'assets/images/shop.png',
+                    description:
+                        ' kamu dapat membeli beragam barang di toko pandan',
+                  ),
+                  
                 ],
               )),
             ],

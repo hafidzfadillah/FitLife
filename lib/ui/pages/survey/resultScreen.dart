@@ -68,7 +68,7 @@ class SurveyResultScreen extends StatelessWidget {
                               isRepeatingAnimation: false,
                               pause: Duration(milliseconds: 3000),
                               animatedTexts: [
-                                TypewriterAnimatedText('${result!.warning}',
+                                TypewriterAnimatedText(result?.warning != null ? result!.warning : 'Dibawah ini adalah hasil penilaian kesehatanmu. Tetap semangat dan jaga kesehatanmu ya! ',
                                     textStyle: GoogleFonts.poppins())
                               ]),
                         ),
@@ -110,7 +110,7 @@ class SurveyResultScreen extends StatelessWidget {
                           RichText(
                               textAlign: TextAlign.start,
                               text: TextSpan(
-                                  text: '${result!.dailyCalories}',
+                                  text: '${result!.dailyCalories.round()}',
                                   style: GoogleFonts.poppins(
                                       color: blackColor,
                                       fontWeight: FontWeight.w600),

@@ -63,7 +63,7 @@ class _ListSportState extends State<ListSport> {
         controller: _scrollController,
         slivers: [
           SliverAppBar(
-            backgroundColor: Color(0xff149968),
+            backgroundColor: Color(0xffF9D171),
             expandedHeight: 30.h,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
@@ -97,7 +97,7 @@ class _ListSportState extends State<ListSport> {
                 Positioned(
                     right: 0,
                     bottom: 0,
-                    child: Image.asset('assets/images/sportModel1.png')),
+                    child: Image.asset('assets/images/skateboard.png' , height: 180, width: 180,)),
               ]),
             ),
           ),
@@ -159,7 +159,7 @@ class _ListSportState extends State<ListSport> {
                   RoundedButton(
                       title: 'Mulai',
                       style: GoogleFonts.poppins(),
-                      background: primaryDarkColor,
+                      background: Color(0xffF9D171),
                       onClick: () {
                         Navigator.pushNamed(context, '/action-sport',
                             arguments: widget.data['exercises']);

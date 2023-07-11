@@ -84,7 +84,7 @@ class _ExerciseScheduleState extends State<ExerciseSchedule> {
                             : Icon(
                                 Icons.check_circle,
                                 color: status == 2
-                                    ? primaryColor
+                                    ? Color(0xffF9D171)
                                     : const Color(0xffCECECE),
                                 size: 32,
                               ),
@@ -106,7 +106,7 @@ class _ExerciseScheduleState extends State<ExerciseSchedule> {
                               height: 2,
                               margin: EdgeInsets.symmetric(horizontal: 1.h),
                               decoration: BoxDecoration(
-                                  color: primaryColor,
+                                  color: Color(0xffF9D171),
                                   borderRadius: BorderRadius.circular(4)),
                             ))
                       ],
@@ -123,7 +123,7 @@ class _ExerciseScheduleState extends State<ExerciseSchedule> {
           RoundedButton(
               title: 'Mulai olahraga terencana',
               style: GoogleFonts.poppins(color: Colors.white),
-              background: primaryColor,
+              background: Color(0xffF9D171),
               onClick: () {
                 print(widget.isPremium);
                 if (widget.exercises[currentWeek]['days'][selectedDay]
@@ -150,8 +150,8 @@ class _ExerciseScheduleState extends State<ExerciseSchedule> {
           ),
           RoundedOutlineButton(
               title: 'Catat aktivitas Manual',
-              style: GoogleFonts.poppins(color: primaryColor),
-              color: primaryColor,
+              style: GoogleFonts.poppins(color: Color(0xffF9D171)),
+              color: Color(0xffF9D171),
               onClick: () {
                 Navigator.pushNamed(context, '/input-sport');
               },
